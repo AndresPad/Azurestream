@@ -1,11 +1,8 @@
 ﻿using azurestream.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace azurestream.Controllers
 {
@@ -18,16 +15,33 @@ namespace azurestream.Controllers
             _logger = logger;
         }
 
+        //----------------------------------------------------------------------------------------------------------
         public IActionResult Index()
         {
             return View();
         }
 
+        //----------------------------------------------------------------------------------------------------------
+        [Authorize]
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        //----------------------------------------------------------------------------------------------------------
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        //----------------------------------------------------------------------------------------------------------
         public IActionResult Privacy()
         {
             return View();
         }
 
+        //----------------------------------------------------------------------------------------------------------
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -1,0 +1,62 @@
+﻿@model apa.BOL.FishTank.ChartViewModels.ChartViewModel
+
+@{
+    ViewBag.Title = @Model.Title;
+    Layout = "_AppLayoutFlex";
+}
+
+@section CssIncludes {
+    @*<link href="~/lib/morris.js/morris.css" rel="stylesheet" />*@
+    <link href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" rel="stylesheet" />
+
+}
+
+
+<!--FISH TANK CHART-->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title mb-0">
+                    <h4>@Model.Title Chart<span class="blue-dot"></span></h4>
+                    <hr class="blu w-100" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div id="chart" style="height: 250px;"></div>
+                        @*<div id="myfirstchart" style="height: 250px;"></div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--FISH TANK CHART-->
+
+
+@section JavaScriptIncludes {
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.js"></script>
+    <script>
+           jQuery(document).ready(function ($) {
+                $.getJSON("@Model.DataUrl", function(data) {
+                    Morris.Line({
+                        element: 'chart',
+                        data: data,
+                        xkey: 'timeStamp',
+                        ykeys: ['value'],
+                        labels: ['value'],
+                        resize: true,
+                        dateFormat: function (d) {
+                            var date = new Date(d);
+                            return date.getHours() + ":" + date.getMinutes();
+                        }
+                    });
+                });
+            });
+    </script>
+}

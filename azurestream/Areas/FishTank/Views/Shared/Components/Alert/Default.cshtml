@@ -1,0 +1,22 @@
+﻿@model List<string>
+
+<div class="col-lg-6 col-md-12 mt-2">
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <i class="fa fa-bell fa-fw"></i>
+            Alerts
+        </div>
+        <div class="panel-body">
+            <div class="list-group">
+                @foreach (var item in Model)
+                {
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-exclamation fa-fw"></i>
+                        @item
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,61 @@
+﻿@model apa.BOL.FishTank.ChartViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Fish Tank Dashboard";
+    Layout = "_AppLayoutFlex";
+}
+
+<!--FISH TANK INDEX-->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title mb-0">
+                    <h4>@ViewData["Title"]<span class="blue-dot"></span></h4>
+                    <hr class="blu w-100" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                @Html.DisplayFor(m => m.WaterTemperatureTile)
+            </div>
+            <div class="col-md-3">
+                @Html.DisplayFor(m => m.FishMotionTile)
+            </div>
+            <div class="col-md-3">
+                @Html.DisplayFor(m => m.WaterOpacityTile)
+            </div>
+            <div class="col-md-3">
+                @Html.DisplayFor(m => m.LightIntensityTile)
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-lg-6 col-md-6">
+                <div class="form-fieldBox">
+                    <form asp-action="Feed" method="POST">
+                        <label asp-for="FoodAmount" class="col-md-12 control-label"></label>
+                        <div class="col-md-12">
+                            <span class="small">
+                                (<label asp-for="LastFed"></label>
+                                @Model.LastFed)
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input asp-for="FoodAmount" class="form-control input-lg" type="number" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-default large btn-color-blu">Feed!</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @await Component.InvokeAsync("Alert")
+        </div>
+    </div>
+</section>
+<!--FISH TANK INDEX-->
