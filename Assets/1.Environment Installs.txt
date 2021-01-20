@@ -1,0 +1,180 @@
+﻿
+Please Install the following
+--------------------------------------------------------------------------------------------
+#https://github.com/MicrosoftLearning/AZ-204-DevelopingSolutionsforMicrosoftAzure/blob/master/lab.md
+
+#Labs
+https://aka.ms/az204labs
+
+
+#Install .NET Core 3.1
+    https://dotnet.microsoft.com/download/dotnet-core/3.1
+        1. Check and see if you have .Net Core 3.1 installed on your machine. Run following line in PowerShell ISE: 
+            dotnet --version
+            dotnet --info (This will also list out which .net core versions you have installed)
+
+#Install Azure CLI
+    https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
+
+        1. Check and see if you have Azure CLI installed on your machine. Run following line in PowerShell ISE:
+            az --version
+
+
+#Install Azure PowerShell
+
+    #Azure PowerShell is designed for managing and administering Azure resources from the command line.
+    https://docs.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-2.5.0
+
+        1. Check and see if you have PowerShell Installed on your machine. In Command Prompt type in:
+            $PSVersionTable.PSVersion
+
+        2. Check and see if you have Azure Az Module installed on your machine. Run following lines in PowerShell ISE:
+            Get-InstalledModule -Name Rm -AllVersions | select Name,Version
+            Get-InstalledModule -Name Az -AllVersions | select Name,Version
+        
+        3. If you need to install Azure Az Module run one of the following lines in PowerShell:
+            Install-Module -Name Az -AllowClobber -Scope AllUsers
+            Install-Module -Name Az -AllowClobber -Scope CurrentUser
+            Install-Module -Name Az -AllowClobber 
+
+  
+#Install Visual Studio Code
+    https://code.visualstudio.com/
+    1. After installing Visual Studio Code please make sure you have the following extensions installed:
+        -Azure Tools
+        -Azure Account
+        -Azure Repos
+        -Azure Functions
+        -Azure CLI Tools
+        -Azure App Service
+        -Azure Cosmos DB Graph
+        -Azure Kubernetes Service
+        -Azure Logic Apps
+        -Azure Pipelines
+        -Azure Storage
+        -C#
+        -C# Extensions
+        -Docker
+        -Docker Explorer
+        -GitHub Pull Requests
+        -Gitignore
+        -Git Lens
+        -Azure Kubernetes Service
+        -PowerShell
+        -YAML
+
+    https://github.com/pdtit/ARMTemplates/tree/master/JumpVM
+        #This template deploys a single Azure Virtual Machine, running the following:
+
+        #Settings
+            local admin: labadmin
+            local admin password: L@BadminPa55w.rd
+            Azure VNET: jumpVMVNet (10.1.0.0./16)
+            Subnet: SubNet (10.1.0.0/24)
+            Public IP: jumpvmip (basic / static)
+            
+        #Operating System and core tools
+            Operating System Windows Server 2019 Enterprise
+            Visual Studio 2019 Community Edition - latest version
+            7zip
+            putty.install
+            microsoft-edge
+            windows-admin-center
+            foxitreader
+            googlechrome
+            Azure tools
+            azure-cli
+            microsoftazurestorageexplorer
+            azurepowershell
+            azcopy
+
+        #AZ-204 handy tools
+            sql-server-management-studio
+            nodejs-lts
+            cosmosdbexplorer
+            servicebusexplorer
+            docker-desktop
+
+    #Run this in PowerShell to install all the Visual Studio Code Extensions that you need
+    # Install Visual Studio Code Extensions
+    code --install-extension bencoleman.armview
+    code --install-extension ms-azuretools.vscode-apimanagement
+    code --install-extension visualstudioonlineapplicationinsights.application-insights
+    code --install-extension ms-kubernetes-tools.vscode-aks-tools
+    code --install-extension ms-azuretools.vscode-logicapps
+    code --install-extension ms-vsts.team
+    code --install-extension samcogan.arm-snippets
+    code --install-extension ms-vscode.vscode-node-azure-pack
+    code --install-extension ms-dotnettools.csharp
+    code --install-extension formulahendry.docker-explorer
+    code --install-extension ms-edgedevtools.vscode-edge-devtools
+    code --install-extension github.vscode-pull-request-github
+    code --install-extension codezombiech.gitignore
+    code --install-extension eamodio.gitlens
+    code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
+    code --install-extension ms-vscode.theme-markdownkit
+    code --install-extension davidanson.vscode-markdownlint
+    code --install-extension ms-vscode.notepadplusplus-keybindings
+    code --install-extension ms-vscode.powershel
+    code --install-extension ms-python.python
+    code --install-extension joytrekker.rainier
+    code --install-extension ms-vscode-remote.remote-wsl
+    code --install-extension humao.rest-client
+    code --install-extension redhat.vscode-yaml
+
+#Install Visual Studio 2019 - Community Edition is fine. You don't need this this is just a nice to have!
+    https://visualstudio.microsoft.com/downloads/
+
+#Install Postman - You don't need this this is just a nice to have!
+    https://www.getpostman.com/downloads/
+    https://blog.jongallant.com/2017/11/azure-rest-apis-postman/
+    https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow
+
+#Install Azure Storage Explorer
+    https://azure.microsoft.com/en-us/features/storage-explorer/
+
+#Install Docker Desktop on Windows
+    https://docs.docker.com/docker-for-windows/install/
+    https://download.docker.com/win/stable/Docker%20Desktop%20Installer.exe - if you don't want to add in your email use this link
+
+#Install SQL Server Management Tools
+    https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15
+
+#Install Git on Windows 
+    https://git-scm.com/downloads
+
+#Entity Framework Core tools reference - .NET CLI
+    https://docs.microsoft.com/en-us/ef/core/get-started/install/
+    https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet
+    dotnet tool install --global dotnet-ef
+    dotnet ef
+    dotnet ef --help
+    get-help entityframeworkcore
+
+#Install Azure CosmosDB Local Emulator
+    https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator
+
+#Install Service Bus Explorer
+    https://github.com/paolosalvatori/ServiceBusExplorer/releases
+
+#Azure Quickstart Templates
+        https://azure.microsoft.com/en-us/resources/templates/
+
+#Notepad++
+    https://notepad-plus-plus.org/downloads/
+
+#AzCopy
+    https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10
+
+
+There are a lot of other resources to help you learn about Azure. We recommend you bookmark these pages.   
+
+* [Microsoft Learning Community Blog:](https://www.microsoft.com/en-us/learning/community-blog.aspx) Get the latest information about the certification tests and exam study groups.
+
+* [Microsoft Learn:](https://docs.microsoft.com/en-us/learn/) Free role-based learning paths and hands-on experiences for practice
+
+* [Azure Fridays:](https://channel9.msdn.com/Shows/Azure-Friday) Join Scott Hanselman as he engages one-on-one with the engineers who build the services that power Microsoft Azure, as they demo capabilities, answer Scott's questions, and share their insights.
+
+* [Microsoft Azure Blog:](https://azure.microsoft.com/en-us/blog/) Keep current on what's happening in Azure, including what's now in preview, generally available, news & updates, and more.
+
+* [Azure Documentation:](https://docs.microsoft.com/en-us/azure/) Stay informed on the latest products, tools, and features. Get information on pricing, partners, support, and solutions.

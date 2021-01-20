@@ -4,7 +4,7 @@ a functioning Visual Studio 2019 and Visual Studio Code Project that they could 
 their C# and Azure skills. The solution contains a number of demos that could come in extremely useful during your deliveries.
 
 
-![Screenshot of the staging deployment slot to test the deployments](LinkedImages/azurestreamhomepage2.jpg)
+![Screenshot of the staging deployment slot to test the deployments](Assets/images/azurestreamhomepage2.jpg)
 
 # Getting Started
 Getting your code up and running on their own system. 
@@ -73,8 +73,8 @@ Getting your code up and running on their own system.
         - Demo how to use NLog and send logs to Blob Storage Containers.
         - Demo how to run web app in Docker Container, and also explain what a Docker file
 <br/><br/>
-![Screenshot of the staging deployment slot to test the deployments](LinkedImages/AzurestreamSolution.jpg)
-![Screenshot of the staging deployment slot to test the deployments](LinkedImages/azurestreamhomepage2.jpg)
+![Screenshot of the staging deployment slot to test the deployments](Assets/images/AzurestreamSolution.jpg)
+![Screenshot of the staging deployment slot to test the deployments](Assets/images/azurestreamhomepage2.jpg)
 2.	**Azurestream.AD.WebApp** (.NET Core 3.1 Web Project) 
     - Bare-Bones Website 
         - Simple application that gives you what you need to demo Azure AD Authentication
@@ -85,7 +85,7 @@ Getting your code up and running on their own system.
     - Bare-Bones .NET API that has what it needs to demo a simple API and Swagger capabilities.
     - Demo Possibilities:
         - Demo how to configure Swagger and what the Swagger UI looks like.
-        ![Screenshot of the staging deployment slot to test the deployments](LinkedImages/azurestreamapiswagger.jpg)
+        ![Screenshot of the staging deployment slot to test the deployments](Assets/images/azurestreamapiswagger.jpg)
 <br/><br/>
 4. **Azurestream.ARM** (ARM Project) 
     - Demo Possibilities:
@@ -124,7 +124,7 @@ Getting your code up and running on their own system.
         - Demo Transiant Errors with C#
         - I will be continually growing the pool of samples as this evolves. 
 
-        ![Screenshot of the staging deployment slot to test the deployments](LinkedImages/azurestreamconsole.jpg)
+        ![Screenshot of the staging deployment slot to test the deployments](Assets/images/azurestreamconsole.jpg)
 <br/><br/>
 6.	**Azurestream.FuncApp** (.Net Core 3.1 Azure Function Project) 
     - Demo Possibilities:
@@ -134,7 +134,7 @@ Getting your code up and running on their own system.
         - Demo Blob Trigger to CosmosDB
         - Demo Queue Trigger
         - Demo Durable Functions.
-     ![Screenshot of the staging deployment slot to test the deployments](LinkedImages/azurestreamfuncapp.jpg)
+     ![Screenshot of the staging deployment slot to test the deployments](Assets/images/azurestreamfuncapp.jpg)
 <br/><br/>
 7.	**Azurestream.LogicApp** (ARM Logic App Project) 
     - Demo Possibilities:
@@ -143,7 +143,7 @@ Getting your code up and running on their own system.
         - Demo Logic App Actions
         - Demo Logic App ARM Template
         - Demo Logic App Development in Visual Studio
-    ![Screenshot of the staging deployment slot to test the deployments](LinkedImages/azurestreamlogicapp.jpg)
+    ![Screenshot of the staging deployment slot to test the deployments](Assets/images/azurestreamlogicapp.jpg)
 <br/><br/>
 8.	**apa.BOL** (.NET Standard Business Object Layer) 
 9.	**apa.DAL** (.NET Standard Data Access Layer) 

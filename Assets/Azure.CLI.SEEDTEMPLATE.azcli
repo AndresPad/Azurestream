@@ -1,0 +1,109 @@
+#region Header
+#--------------------------------------------------------------------------------------------------------------
+    <#
+      =========================================================================================================
+      Created by:       Author: Your Name | @twitterhandle | your.name@azurestream.io | azurestream.io
+      Created on:       06/01/2020
+      =========================================================================================================
+
+     .SUBSCRIPTION(s): PRODUCTION and R&D
+             PROD 
+                *****************BE VERY CAREFUL WITH THIS AZURE SUBSCRIPTION - THIS IS PRODUCTION*************
+                 -Subscription Name         : Azure Subscription    -> THIS IS THE SUBSCRIPTION NAME
+
+    
+    SCRIPT STEPS 
+    1 - Useful Azure CLI Commands
+    2 - 
+    3 - 
+    #>    
+    
+    #Install Azure CLI
+    #https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?view=azure-cli-latest 
+    #https://docs.microsoft.com/en-us/cli/azure/keyvault?view=azure-cli-latest
+    
+    az --version
+
+    #PARAMETERS
+    $SubscriptionName  = "YOURSUBSCRIPTIONNAME"
+    $SubscriptionID    = "YOURSUBSCRIPTIONID"
+    $Tenant            = "YOURTENANTID" 
+    $ServicePrincipal  = "AzureStreamServicePrincipal"
+    $appID             = "YOURSERVICEPRINCIPALNAME"
+    $password          = "YOURSERVICEPRINCIPALSECRET"
+    $region            = "East US"
+    $rgName            = "AS-Demo-RG"
+#endregion
+
+#-------------------------------------------------------------------------------------
+#region Login
+
+    #Login interactively and set a subscription to be the current active subscription
+    az login 
+
+    #Login with username and password
+    az login -u node.agent.ps@YOURDOMAIN.onmicrosoft.com -p YOURPASSWORD
+
+    #Login with Service Principal
+    az login --service-principal --username $appID --password $password --tenant $Tenant 
+    
+    #You can verify you’ve logged in successfully by listing your Azure subscriptions:
+    #see list of subscriptions
+    az account list --all
+
+    #To set the default subscription for Azure CLI, use:
+    az account set --subscription $SubscriptionName 
+    az account set --subscription $SubscriptionID 
+    az account show --query id
+
+    #Create Service Principal
+    az ad sp create-for-rbac --name AzureStreamServicePrincipal
+    az ad sp reset-credentials --name AzureStreamServicePrincipal
+      
+    #Get Service Principal
+    az ad sp list --filter "displayName eq '$ServicePrincipal'" --query '[].{appDisplayName:appDisplayName, objectId:objectId,appId:appId,appOwnerTenantId:appOwnerTenantId}' -o table
+    az ad sp list --all
+    #Logout
+    az logout --username node.agent.ps@YOURDOMAIN.onmicrosoft.com
+    az logout --username $ServicePrincipal
+#endregion
+
+#-------------------------------------------------------------------------------------
+#region Create Resource Groups
+    # List Resource Groups
+    az group list -o table
+    az group create -n myCLIRG -l eastus
+    #Delete Resource Group
+    az group delete --name myCLIRG --no-wait --yes
+#endregion
+
+#-------------------------------------------------------------------------------------
+#region Create a User Groups  
+  #https://docs.microsoft.com/en-us/cli/azure/ad/user?view=azure-cli-latest#az-ad-user-create
+  az ad group create --display-name AZU-GRP-Admins --mail-nickname AZU-GRP-Admins
+  az ad group create --display-name AZU-GRP-ServiceAccounts --mail-nickname AZU-GRP-ServiceAccounts
+#endregion
+
+#-------------------------------------------------------------------------------------
+#region Create a User(s)
+    #https://docs.microsoft.com/en-us/cli/azure/ad/group?view=azure-cli-latest#az-ad-group-create
+    az ad user create --display-name node.agent.cli --password YOURPASSWORD --user-principal-name node.agent.cli@YOURDOMAIN.ONMICROSOFT.COM --force-change-password-next-login false
+    az ad user create --display-name node.agent.ps  --password YOURPASSWORD --user-principal-name node.agent.ps@YOURDOMAIN.ONMICROSOFT.COM --force-change-password-next-login false
+#endregion
+
+#-------------------------------------------------------------------------------------
+#region Add User to Group
+    #https://docs.microsoft.com/en-us/cli/azure/ad/group/member?view=azure-cli-latest#az-ad-group-member-add
+    az ad group member add --group AZU-GRP-ServiceAccounts --member-id xxxxxxxxx-xxxxxxx-xxxxxx-xxxxx-xxxxxxxxx
+#endregion
+
+#-------------------------------------------------------------------------------------
+#region Add Role - Group at a subscription scope
+    #https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-cli
+    az role assignment create --role Owner --assignee-object-id <assignee_object_id> --scope </subscriptions/subscription_id>
+    az role assignment create --role Owner --assignee-object-id YOURADGROUPID        --scope /subscriptions/YOURSubscriptionID
+
+    az role assignment create --role Owner --assignee-object-id xxxxxxxxx-xxxxxxx-xxxxxx-xxxxx-xxxxxxxxx --scope /subscriptions/55f0e925-6d88-460f-abac-052cdcf22aef
+    az role assignment create --role Owner --assignee-object-id xxxxxxxxx-xxxxxxx-xxxxxx-xxxxx-xxxxxxxxx --scope /subscriptions/55f0e925-6d88-460f-abac-052cdcf22aef
+#endregion
+
