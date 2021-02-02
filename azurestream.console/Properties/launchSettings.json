@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "azurestream.console": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

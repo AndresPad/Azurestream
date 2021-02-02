@@ -1,0 +1,37 @@
+<header>
+    <nav id="topnav" class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand m-1 mr-5 logo"><img src="~/images/logos/azurestreamstreamers.svg" alt="AZURESTREAM - Cloud and IoT Consulting" class="logo-blue" width="200" height="30" /></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navigation" class="collapse navbar-collapse">
+                <ul class="navigation-menu navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About">About</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-fragment="core" asp-controller="Home" asp-action="Index">Core</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-fragment="vision" asp-controller="Home" asp-action="Index">Vision</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dev
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                            <a class="dropdown-item" asp-area="cosmosdb" asp-controller="cosmosadmin" asp-action="Index">CosmosDB</a>
+                            <a class="dropdown-item" asp-area="fishtank" asp-controller="ftadmin" asp-action="Index">Fish Tank</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+                @await Html.PartialAsync("_LoginPartial")
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control form-control-sm mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-info btn-sm my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <partial name="_CookieConsentPartial" />
+
+</header>

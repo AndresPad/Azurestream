@@ -1,0 +1,26 @@
+{
+  "indexingMode": "consistent",
+  "automatic": true,
+  "includedPaths": [
+    {
+      "path": "/username/?",
+      "indexes": []
+    },
+    {
+      "path": "/productName/?",
+      "indexes": []
+    },
+    {
+      "path": "/verifiedPurchase/?",
+      "indexes": []
+    }
+  ],
+  "excludedPaths": [
+    {
+      "path": "/*"
+    },
+    {
+      "path": "/\"_etag\"/?"
+    }
+  ]
+}

@@ -1,17 +1,29 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Bogus" Version="32.1.1" />
+    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.16.0" />
     <PackageReference Include="Microsoft.Azure.CognitiveServices.ContentModerator" Version="2.0.0" />
     <PackageReference Include="Microsoft.Azure.CognitiveServices.Language.TextAnalytics" Version="4.0.0" />
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.16.0" />
     <PackageReference Include="Microsoft.Azure.Search" Version="10.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\apa.BOL\apa.BOL.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="VolcanoData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

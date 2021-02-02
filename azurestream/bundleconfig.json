@@ -1,0 +1,84 @@
+[
+  {
+    "outputFileName": "wwwroot/js-css/css/normalize.min.css",
+    "inputFiles": [
+      "wwwroot/js-css/css/normalize.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js-css/css/flaticon.min.css",
+    "inputFiles": [
+      "wwwroot/js-css/css/flaticon.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js-css/css/hover.min.css",
+    "inputFiles": [
+      "wwwroot/js-css/css/hover.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js-css/css/revolayers.min.css",
+    "inputFiles": [
+      "wwwroot/js-css/css/revolayers.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js-css/css/revonavigation.min.css",
+    "inputFiles": [
+      "wwwroot/js-css/css/revonavigation.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js-css/css/revoslider.min.css",
+    "inputFiles": [
+      "wwwroot/js-css/css/revoslider.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js-css/css/xslayout.min.css",
+    "inputFiles": [
+      "wwwroot/js-css/css/xslayout.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js-css/css/xsInverse.min.css",
+    "inputFiles": [
+      "wwwroot/js-css/css/xsInverse.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js-css/css/xslayout-responsive.min.css",
+    "inputFiles": [
+      "wwwroot/js-css/css/xslayout-responsive.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js-css/js/xssmoothscroll.min.js",
+    "inputFiles": [
+      "wwwroot/js-css/js/xssmoothscroll.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js-css/js/xsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js-css/js/xsindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js-css/js/xssite.min.js",
+    "inputFiles": [
+      "wwwroot/js-css/js/xssite.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js-css/js/jquery.spin.min.js",
+    "inputFiles": [
+      "wwwroot/js-css/js/jquery.spin.js"
+    ]
+  }
+]
