@@ -1,0 +1,72 @@
+﻿/*
+  Media Queries
+*/
+@media (max-width: 1024px) {
+   
+    #footer .footer-content
+   {
+        text-align: center;
+    }
+}
+
+@media (min-width: 991.98px) {
+   
+}
+
+@media (max-width: 991.98px) {
+   
+}
+
+@media all and (device-width: 1024px) and (device-height: 768px) and (orientation:landscape) {
+}
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape) {
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait) {
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    
+}
+
+@media (min-width: 767.98px) {
+   
+}
+
+@media (max-width: 767.98px) {
+    
+}
+
+@media (max-width: 767px) {
+    footer.section-full {
+        padding: 50px 0;
+    }
+
+    .footer-content p {
+        font-size: 12px;
+    }
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+}
+
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+}
+
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+}
+
+
+/*Extra small devices (portrait phones, less than 576px) 
+No media query since this is the default in Bootstrap Extra small devices (portrait phones, less than 576px) 
+No media query since this is the default in Bootstrap*/

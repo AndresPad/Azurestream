@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "CosmosDB Dashboard";
+    Layout = "_AppLayoutFlex";
+}
+
+<!--COSMOS DB INDEX-->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title mb-0">
+                    <h4>@ViewData["Title"]<span class="blue-dot"></span></h4>
+                    <hr class="blu w-100" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="list-group">
+                    <a class="dropdown-item" asp-controller="cosmostodolist" asp-action="Index"><i class="fa fa-chevron-right"></i> To-Do Items</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--COSMOS DB INDEX-->

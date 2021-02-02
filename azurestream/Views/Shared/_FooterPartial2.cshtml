@@ -1,0 +1,46 @@
+@using Microsoft.Extensions.Options;
+@using apa.BOL.Config;
+@inject IOptions<CnxConfig> cnxConfig
+
+<footer id="footer">
+    <div class="container-fluid">
+        <div class="row pt-25 pb-10">
+            <div class="col-lg-3 col-md-12 col-sm-12 pr-0 pt-2">
+                <div class="copy-text pt-1">
+                    <p><i class="fa fa-heart-o blue mr-10"></i><i class="fa fa-copyright"></i> @DateTime.Now.Year <a href="http://nodestream.io" target="_blank">nodestream</a>, All rights reserved.</p>
+                    <environment names="Development">
+                        <p> ASPNETCORE_ENVIRONMENT = @hostingEnv.EnvironmentName</p>
+                    </environment>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 pl-0 pr-0 pt-2">
+                <div class="footerlink-list">
+                    <ul class="list-inline">
+                        <li><a asp-area="" asp-controller="Home" asp-action="">IoT</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="">Solutions</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="">Resources</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="">Developers</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="">Company</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12 col-sm-12 pl-0">
+                <div class="footer-social">
+                    <ul>
+                        <li><a href="https://twitter.com/nodestreamio" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/andrespadillaandrade" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                        <li><a href="https://github.com/nodestreamio" target="_blank"><i class="fab fa-github"></i></a></li>
+                        <li><a href="https://plus.google.com/+nodestreamio" target="_blank"><i class="fab fa-google-plus"></i></a></li>
+                        <li><a href="https://www.youtube.com/c/nodestreamio" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <environment names="Development">
+                <p class="copy-right-text color-4 text-white"> DBCnx = @cnxConfig.Value.CnxDb</p>
+            </environment>
+        </div>
+    </div>
+</footer>

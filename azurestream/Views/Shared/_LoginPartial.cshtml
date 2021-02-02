@@ -1,0 +1,26 @@
+@using System.Security.Principal
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+        <ul class="navigation-menu navbar-nav navbar-right">
+            <li class="nav-item dropdown">
+                <a asp-controller="Manage" asp-action="Index" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Manage">
+                    @User.Identity.Name <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a asp-controller="Manage" asp-action="Index" class="dropdown-item">Manage Account</a>
+                    <a asp-area="contoso" asp-controller="uc" asp-action="Index" class="dropdown-item">Azurestream University</a>
+                    <div class="dropdown-divider"></div>
+                    <a asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignOut" class="btn btn-link btn-block navbar-btn">Sign out Azure AD<i class="fa fa-power-off" aria-hidden="true"></i></a>
+                </div>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="navigation-menu navbar-nav navbar-right">
+        <li class="nav-item"><a class="nav-link" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignIn">Sign in Azure AD</a></li>
+    </ul>
+}

@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head prefix="og: http://ogp.me/ns#">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Azurestream - @ViewData["Title"]</title>
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
+    <meta name="keywords" content="Business IT Consulting, Cloud Solutions, Cloud Consulting, Technology Services, IT Consulting, Application Management Services, Programming, Programming Services ASP.NET, ASP.NET Core, C#, Cloud, Azure, Cloud Computing, Internet of Things, IoT, Smart Systems, Big Data, Analytics, Automation, PowerShell, Internet-Connected Devices, Process automation, Monitoring." />
+    <meta name="description" content="Azurestream is a Business and IT consulting company specializing in Cloud computing and the Internet of Things. We help businesses gain a competitive advantage, reduce costs and properly develop their Cloud and IoT ecosystems." />
+    <link rel="canonical" href="http://www.azurestream.io" />
+    <!-- for Facebook -->
+    <meta property="og:title" content="AZURESTREAM | Build Amazing Cloud Ecosystems | IT Consulting Services" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="http://www.azurestream.io/images/logos/azurestream.png" />
+    <meta property="og:url" content="http://www.azurestream.io/" />
+    <meta property="og:description" content="AZURESTREAM is a Business and IT consulting company specializing in Cloud computing and the Internet of Things. We help businesses gain a competitive advantage, reduce costs and properly develop their Cloud and IoT ecosystems." />
+    <meta property="og:site_name" content="AZURESTREAM" />
+    <meta property="og:locale" content="en_US" />
+    <!-- for Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="AZURESTREAM | Build Amazing Cloud Ecosystems | IT Consulting Services" />
+    <meta name="twitter:description" content="Azurestream is a Business and IT consulting company specializing in Cloud computing and the Internet of Things. We help businesses gain a competitive advantage, reduce costs and properly develop their Cloud and IoT ecosystems." />
+    <meta name="twitter:image" content="http://azurestream.io/images/logos/azurestream.png" />
+    <meta name="twitter:creator" content="@@azurestream" />
+    <meta name="twitter:site" content="@@azurestream" />
+    <meta name="twitter:url" content="https://twitter.com/azurestream" />
+
+    <link href="~/js-css/css/normalize.min.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"  
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+          crossOrigin="anonymous" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+    <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/lib/linearicons/dist/web-font/linearicons.min.css" rel="stylesheet" />
+    <link href="~/lib/wow/css/libs/animate.min.css" rel="stylesheet" />
+    <environment include="Development">
+        <link href="~/js-css/css/main.css" rel="stylesheet" />
+        <link href="~/js-css/css/xslayout.css" rel="stylesheet" />
+        <link href="~/js-css/css/xslayout-responsive.css" rel="stylesheet" />
+    </environment>
+    <environment exclude="Development">
+        <link href="~/js-css/css/main.css" rel="stylesheet" />
+        <link href="~/js-css/css/xslayout.css" rel="stylesheet" />
+        <link href="~/js-css/css/xslayout-responsive.min.css" rel="stylesheet" />
+    </environment>
+    @RenderSection("CssIncludes", required: false)
+    @Html.Raw(JavaScriptSnippet.FullScript)
+</head>
+<body ng-controller="MainController">
+    <!-- Preloader -->
+    <!-- Preloader -->
+    <div class="d-flex flex-column h-100">
+        <!-- HEADER -->
+        @{
+            await Html.RenderPartialAsync("_HeadPartial");
+        }
+        <!-- HEADER -->
+        <div class="d-flex flex-column flex-grow">
+            <!-- MAIN-CONTAINER -->
+            <main class="body-content h-100 flex-grow">
+                @RenderBody()
+            </main>
+            <!-- MAIN-CONTAINER -->
+            <!-- FOOTER -->
+            @{
+                await Html.RenderPartialAsync("_FooterPartial");
+            }
+            <!-- FOOTER -->
+        </div>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/popper.js/dist/umd/popper.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/lib/jquery_appear/jquery.appear.min.js"></script>
+        <script src="~/lib/scrollup/dist/jquery.scrollUp.min.js"></script>
+        <script src="~/js-css/js/xssmoothscroll.min.js"></script>
+        <script src="~/lib/wow/dist/wow.min.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossOrigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"
+                asp-fallback-src="~/lib/popper.js/dist/popper.min.js"
+                asp-fallback-test="window.jQuery"
+                crossOrigin="anonymous"
+                integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49">
+        </script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+		crossOrigin="anonymous"
+	        integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+        </script>
+        <script src="~/lib/jquery_appear/jquery.appear.min.js"></script>
+        <script src="~/lib/scrollup/dist/jquery.scrollUp.min.js"></script>
+        <script src="~/js-css/js/xssmoothscroll.min.js"></script>
+        <script src="~/lib/wow/dist/wow.min.js"></script>
+    </environment>
+
+    <script src="~/js-css/js/xssite.js"></script>
+    @RenderSection("JavaScriptIncludes", required: false)
+    @RenderSection("googleAnalytics", required: false)
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

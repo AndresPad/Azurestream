@@ -1,0 +1,73 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    //{
+    //  "provider": "unpkg",
+    //  "library": "bootstrap@4.3.1",
+    //  "destination": "wwwroot/lib/bootstrap/"
+    //},
+    {
+      "library": "font-awesome@5.10.2",
+      "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "library": "flexslider@2.7.2",
+      "destination": "wwwroot/lib/flexslider/"
+    },
+    {
+      "library": "jquery@3.3.1",
+      "files": [
+        "core.js",
+        "jquery.min.js",
+        "jquery.js",
+        "jquery.min.map",
+        "jquery.slim.min.js",
+        "jquery.slim.js"
+      ],
+      "destination": "wwwroot/lib/jquery/dist/"
+    },
+    {
+      "library": "jquery-validate@1.19.1",
+      "files": [
+        "additional-methods.min.js",
+        "additional-methods.js",
+        "jquery.validate.min.js",
+        "jquery.validate.js"
+      ],
+      "destination": "wwwroot/lib/jquery-validation/dist/"
+    },
+    {
+      "library": "jquery-validation-unobtrusive@3.2.11",
+      "files": [
+        "jquery.validate.unobtrusive.min.js",
+        "jquery.validate.unobtrusive.js"
+      ],
+      "destination": "wwwroot/lib/jquery-validation-unobtrusive/dist/"
+    },
+    {
+      "library": "OwlCarousel2@2.3.4",
+      "destination": "wwwroot/lib/owl.carousel/dist/"
+    },
+    {
+      "library": "parallax.js@1.5.0",
+      "destination": "wwwroot/lib/parallax.js/"
+    },
+    {
+      "library": "particles.js@2.0.0",
+      "destination": "wwwroot/lib/particles.js/"
+    },
+    {
+      "library": "popper.js@1.15.0",
+      "destination": "wwwroot/lib/popper.js/dist/"
+    },
+    {
+      "library": "scrollup@2.4.1",
+      "destination": "wwwroot/lib/scrollup/dist/"
+    },
+    {
+      "library": "wow@1.1.2",
+      "destination": "wwwroot/lib/wow/dist"
+    }
+  ]
+}

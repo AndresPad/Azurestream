@@ -1,8 +1,429 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Build Amazing Cloud and IoT Ecosystems | IT Consulting Services | Cloud and IoT Consulting";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@section CssIncludes {
+    <link href="~/lib/owl.carousel/dist/assets/owl.carousel.min.css" rel="stylesheet" />
+}
+
+<!-- Start Banner -->
+<section class="default-banner banner-1 pt-0 pb-0">
+    <div class="container">
+        <div class="row height-750 align-items-center">
+            <div class="col-md-5 col-12">
+                <div class="banner-content">
+                    <h2 class="text-white mb-30">Making the Cloud <br> a Reality</h2>
+                    <p class="text-white">Edge connectivity, device management, data and applications are all available in Azurestream's end-to-end development platform.</p>
+                    <a class="video" href="https://www.youtube.com/watch?v=5ES-1g_mGxY" target="_blank">
+                        <img src="~/images/buttons/play-btn4.png" alt="" />
+                        <span>Watch Intro</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-7 d-flex justify-content-center align-items-center hidden-sm-down">
+                <div class="single-phone">
+                    <img src="~/images/banners/apps_and_infrastructure.svg" class="img-fluid" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Start Banner -->
+<!-- Start About -->
+<section class="about section-full relative" id="about">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-10">
+                <div class="section-title text-center pb-50">
+                    <h3>Azure Redis</h3>
+                    <img src="~/images/icon/title-bottom-4.png" alt="" />
+
+                    <ul>
+                        <li>@ViewData["CurrentTime"]</li>
+                        <li>@ViewData["school"]</li>
+                        <li>@ViewData["soccer"]</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End About -->
+<!-- Start How Does It Work -->
+<section class="how-work section-full gray-bg" id="how-work">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-10">
+                <div class="section-title text-center pb-50">
+                    <h3>How this Works?</h3>
+                    <img src="~/images/icon/title-bottom-4.png" alt="" />
+                    <p>Azurestream was built to provide the fastest road to developing for the cloud.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End How Does It Work -->
+<!-- Start Special Feature -->
+<section id="features" class="section-full">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-10">
+                <div class="section-title text-center pb-50">
+                    <h3>Special Features</h3>
+                    <img src="~/images/icon/title-bottom-4.png" alt="" />
+                    <p>All users on Azurestream will know that there are thousands of people out there ready and willing to learn about Azure and the Cloud.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="single-s-feature color-4 mt-30">
+                    <div class="icon">
+                        <span class="lnr lnr-magic-wand"></span>
+                    </div>
+                    <h5>Auto Scaling</h5>
+                    <p></p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="single-s-feature color-4 mt-30">
+                    <div class="icon">
+                        <span class="lnr lnr-bubble"></span>
+                    </div>
+                    <h5>API Management</h5>
+                    <p></p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="single-s-feature color-4 mt-30">
+                    <div class="icon">
+                        <span class="lnr lnr-pie-chart"></span>
+                    </div>
+                    <h5>Batch Processing</h5>
+                    <p></p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="single-s-feature color-4 mt-30">
+                    <div class="icon">
+                        <span class="lnr lnr-gift"></span>
+                    </div>
+                    <h5>Containers</h5>
+                    <p></p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="single-s-feature color-4 mt-30">
+                    <div class="icon">
+                        <span class="lnr lnr-code"></span>
+                    </div>
+                    <h5>Clean Codes</h5>
+                    <p></p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="single-s-feature color-4 mt-30">
+                    <div class="icon">
+                        <span class="lnr lnr-sun"></span>
+                    </div>
+                    <h5>Creative Design</h5>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Special Feature -->
+<!-- Start Video -->
+<section class="section-full gray-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="video-box">
+                    <div id="video4" class="player simple-player" data-property="{videoURL:'l_tHTmd5pgk',containment:'self',mute:false,autoPlay:false,loop:false,opacity:.8}"></div>
+                    <div id="thumbnail_container" class="thumbnail_container">
+                        <!-- <img class="thumbnail" id="thumbnail" alt="" src="img/video/video-thumb1.jpg"/> -->
+                        <div class="overlay video-overlay-4"></div>
+                    </div>
+                    <a class="start-video" onclick="jQuery('#video4').YTPPlay();"><img src="img/play-btn1.png" alt="" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-50">
+            <div class="col-lg-2 col-6">
+                <div class="single-stat color-4 d-flex">
+                    <div class="icon">
+                        <span class="lnr lnr-sun"></span>
+                    </div>
+                    <div class="desc">
+                        <h4>200</h4>
+                        <span>Powerful Examples</span>
+                    </div>
+                </div>
+            </div>
+            <div class="offset-lg-1 col-lg-2 col-6">
+                <div class="single-stat color-4 d-flex">
+                    <div class="icon">
+                        <span class="lnr lnr-users"></span>
+                    </div>
+                    <div class="desc">
+                        <h4>672</h4>
+                        <span>Trainers Training</span>
+                    </div>
+                </div>
+            </div>
+            <div class="offset-lg-1 col-lg-2 col-6">
+                <div class="single-stat color-4 d-flex">
+                    <div class="icon">
+                        <span class="lnr lnr-laptop"></span>
+                    </div>
+                    <div class="desc">
+                        <h4>168</h4>
+                        <span>Created Pages</span>
+                    </div>
+                </div>
+            </div>
+            <div class="offset-lg-1 col-lg-2 col-6">
+                <div class="single-stat color-4 d-flex">
+                    <div class="icon">
+                        <span class="lnr lnr-user"></span>
+                    </div>
+                    <div class="desc">
+                        <h4>100</h4>
+                        <span>Team Members</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Video -->
+<!-- Start ScreenShots -->
+<section id="screenshots" class="section-full">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-10">
+                <div class="section-title text-center pb-50">
+                    <h3>Big Data</h3>
+                    <img src="~/images/icon/title-bottom-4.png" alt="" />
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End ScreenShots -->
+<!-- Start Team -->
+<section class="section-full p4-bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-10">
+                <div class="section-title text-center pb-50">
+                    <h3 class="text-white">Team Members</h3>
+                    <img src="~/images/icon/title-bottom1-4.png" alt="" />
+                    <p class="text-white">Finding the perfect learning tool for Flash is a daunting task to any novice web developer. One can find help in a number of ways.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-20">
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="single-member color-1 mt-20 relative">
+                    <img src="~/img/team/t1.jpg" alt="" class="img-fluid">
+                    <div class="overlay overlay-bg overlay-team d-flex flex-column justify-content-between">
+                        <div class="head mt-30">
+                            <h5>John Doe</h5>
+                            <span>Senior Cloud Developer</span>
+                        </div>
+                        <ul class="d-flex justify-content-between">
+                            <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                            <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="single-member color-1 relative mt-20">
+                    <img src="~/img/team/t2.jpg" alt="" class="img-fluid">
+                    <div class="overlay overlay-bg overlay-team d-flex flex-column justify-content-between">
+                        <div class="head mt-30">
+                            <h5>John Doe</h5>
+                            <span>Senior Cloud Developer</span>
+                        </div>
+                        <ul class="d-flex justify-content-between">
+                            <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                            <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="single-member color-1 relative mt-20">
+                    <img src="~/img/team/t3.jpg" alt="" class="img-fluid">
+                    <div class="overlay overlay-bg overlay-team d-flex flex-column justify-content-between">
+                        <div class="head mt-30">
+                            <h5>John Doe</h5>
+                            <span>Senior Cloud Developer</span>
+                        </div>
+                        <ul class="d-flex justify-content-between">
+                            <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                            <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="single-member color-1 relative mt-20">
+                    <img src="~/img/team/t4.jpg" alt="" class="img-fluid">
+                    <div class="overlay overlay-bg overlay-team d-flex flex-column justify-content-between">
+                        <div class="head mt-30">
+                            <h5>John Doe</h5>
+                            <span>Senior Cloud Developer</span>
+                        </div>
+                        <ul class="d-flex justify-content-between">
+                            <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                            <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Team -->
+<!-- Start Accordion -->
+<section id="faqs" class="section-full">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-10">
+                <div class="section-title text-center pb-50">
+                    <h3>Frequently Asked Questions</h3>
+                    <img src="~/images/icon/title-bottom-4.png" alt="" />
+                    <p>I’m not really sure about?</p>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center mt-50">
+            <div class="col-md-6 col-12">
+                <div class="first-accordion color-4">
+                    <div id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingOne">
+                                <h5 class="mb-0">
+                                    <a class="d-flex justify-content-between align-items-center" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <span>Easy to Use</span>
+                                        <span class="lnr lnr-circle-minus"></span>
+                                    </a>
+                                </h5>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="card-block">
+                                    Are you considering developing in the cloud.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingTwo">
+                                <h5 class="mb-0">
+                                    <a class="collapsed d-flex justify-content-between align-items-center" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        High Availability
+                                        <span class="lnr lnr-plus-circle"></span>
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="card-block">
+                                    Need to implement auto scaling for your web apps.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingThree">
+                                <h5 class="mb-0">
+                                    <a class="collapsed d-flex justify-content-between align-items-center" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        Message Handling
+                                        <span class="lnr lnr-plus-circle"></span>
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                                <div class="card-block">
+                                    Need to handle message queues and retry logic
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" role="tab" id="headingFour">
+                                <h5 class="mb-0">
+                                    <a class="collapsed d-flex justify-content-between align-items-center" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                                        Cosmos DB
+                                        <span class="lnr lnr-plus-circle"></span>
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour">
+                                <div class="card-block">
+                                    Need global availability for your DB
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 hidden-sm-down">
+                <img src="~/images/banners/p9.png" alt="" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Accordion -->
+<!-- Start Download Area -->
+<section class="section-full relative p4-bg overflow-hidden">
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-lg-6 col-12">
+                <div class="download-content">
+                    <h3 class="text-white mb-20">Download Azurestream Today!</h3>
+                    <p class="text-white"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- End Download Area -->
+<!-- Start Feature Toggle Area -->
+<section class="section-full relative p4-bg overflow-hidden">
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-lg-6 col-12">
+                @{ var toggle = new azurestream.Toggle.NewFunctionality();
+                    if (toggle.FeatureEnabled)
+                    {
+                        <img src="https://azurecomcdn.azureedge.net/cvt-0263d7c04276b886d312543847daf2ea5607e9712786cdade4974aaf983139b6/images/page/home/migrate.png" />
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- End Feature Toggle Area -->
+
+@section JavaScriptIncludes {
+    <script src="~/lib/owl.carousel/dist/owl.carousel.min.js"></script>
+    <script src="~/js-css/js/xsindex.js"></script>
+}

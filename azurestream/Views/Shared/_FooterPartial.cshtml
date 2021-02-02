@@ -1,0 +1,45 @@
+@using Microsoft.Extensions.Options;
+@using apa.BOL.Config;
+@inject IOptions<CnxConfig> cnxConfig
+
+<footer id="footer" class="section-50">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-4">
+                <div class="footer-content d-flex flex-column align-items-center">
+                    <p class="copy-right-text color-1 text-white"><i class="far fa-heart blue mr-10"></i><i class="fa fa-copyright"></i> @DateTime.Now.Year <a href="http://azurestream.io" target="_blank">azurestream</a>, All rights reserved.</p>
+                    <environment names="Development">
+                        <p class="copy-right-text color-4 text-white"> ASPNETCORE_ENVIRONMENT = @hostingEnv.EnvironmentName</p>
+                    </environment>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="footer-content d-flex flex-column align-items-center">
+                    <ul class="list-inline">
+                        <li><a asp-fragment="about" asp-controller="Home" asp-action="">About</a></li>
+                        <li><a asp-fragment="core" asp-controller="Home" asp-action="">Core</a></li>
+                        <li><a asp-fragment="vision" asp-controller="Home" asp-action="">Vision</a></li>
+                        <li><a asp-fragment="services" asp-controller="Home" asp-action="">Services</a></li>
+                        <li><a asp-fragment="contact" asp-controller="Home" asp-action="">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="footer-content d-flex flex-column align-items-center">
+                    <ul class="footer-social color-1 d-flex mb-20">
+                        <li><a href="https://twitter.com/azurestreamio" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/azurestream" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                        <li><a href="https://github.com/azurestreamio" target="_blank"><i class="fab fa-github"></i></a></li>
+                        <li><a href="https://plus.google.com/+azurestreamio" target="_blank"><i class="fab fa-google-plus"></i></a></li>
+                        <li><a href="https://www.youtube.com/c/azurestreamio" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <environment names="Development">
+                <p class="copy-right-text color-4 text-white"> DBCnx = @cnxConfig.Value.CnxDb</p>
+            </environment>
+        </div>
+    </div>
+</footer>
