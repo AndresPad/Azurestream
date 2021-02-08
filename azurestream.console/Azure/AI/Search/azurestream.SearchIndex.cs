@@ -37,7 +37,7 @@ namespace azurestream.console
         {
             var definition = new Index()
             {
-                Name = "hotels-index",
+                Name = "hotels-consoleapp",
                 Fields = FieldBuilder.BuildForType<Hotel>()
             };
 
@@ -80,7 +80,7 @@ namespace azurestream.console
 
             try
             {
-                ISearchIndexClient indexClient = serviceClient.Indexes.GetClient("hotels-index");
+                ISearchIndexClient indexClient = serviceClient.Indexes.GetClient("hotels-consoleapp");
                 indexClient.Documents.Index(batch);
             }
             catch (Exception e)
