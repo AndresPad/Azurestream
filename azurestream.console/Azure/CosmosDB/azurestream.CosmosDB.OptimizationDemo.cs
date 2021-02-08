@@ -20,10 +20,10 @@ namespace azurestream.console
     public class CosmosDBOptimizationDemo
     {
         // The Azure Cosmos DB endpoint for running this sample.
-        private static readonly string EndpointUri = ConfigurationManager.AppSettings["EndPointUri"];
+        private static readonly string EndpointUri = ConfigurationManager.AppSettings["accountEndpoint"];
 
         // The primary key for the Azure Cosmos account.
-        private static readonly string PrimaryKey = ConfigurationManager.AppSettings["PrimaryKey"];
+        private static readonly string PrimaryKey = ConfigurationManager.AppSettings["accountKey"];
 
         // The Cosmos client instance
         private CosmosClient cosmosClient;
