@@ -56,6 +56,7 @@ namespace azurestream
 
                  var builtConfig = config.Build();
 
+                 //IF IM DEVELOPING LOCALLY GO IN HERE AND GRAP CREDENTIALS FOR KEY VAULT AND BINGO! IM IN KEY VAULT
                  if (env.IsDevelopment())
                  {
                      //https://docs.microsoft.com/en-us/aspnet/core/security/key-vault-configuration?view=aspnetcore-5.0
@@ -67,6 +68,7 @@ namespace azurestream
                      config.AddAzureKeyVault(keyVaultClient, new KeyVaultSecretManager());
                  }
 
+                 //IF I'VE DEPLOYED TO AZURE GO IN HERE IF I'M USING A MANAGED IDENTITY AND BINGO! IM IN KEY VAULT
                  if (env.IsProduction())
                  {
                      //Getting Key Vault using Managed Identity
@@ -84,7 +86,7 @@ namespace azurestream
                  logging.AddConsole();
                  logging.AddDebug();
                  logging.AddAzureWebAppDiagnostics(); //The provider only works when the project runs in the Azure environment. It has no effect when the project is run locally—it doesn't write to local files or local development storage for blobs.  
-                 logging.AddNLog();
+                 //logging.AddNLog();
              })
              .UseNLog()
              .ConfigureServices(serviceCollection => serviceCollection
