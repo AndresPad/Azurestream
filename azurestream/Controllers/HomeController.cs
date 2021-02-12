@@ -48,6 +48,10 @@ namespace azurestream.Controllers
 
             int num = new Random().Next();
             num.ToString();
+
+            //_cache.Remove("CacheTime");
+            //_cache.Remove("school");
+
             if (!string.IsNullOrEmpty(cachetimevalue))
             {
                 ViewData["CurrentTime"] = "Fetched from cache : " + cachetimevalue;
