@@ -26,8 +26,10 @@
     "End of mission": {
         "Recovered by": "USS Hornet",
         "Landing date": "July 24, 1969, 16:50:35 (1969-07-24UTC16:50:36Z) UTC2",
-        "Landing site": "North Pacific Ocean",
-        "": "13°19N 169°9W / 13.317°N 169.150°W / 13.317; -169.150 (Apollo 11 splashdown)2"
+		"Landing site": [
+            "North Pacific Ocean",
+            "13°19N 169°9W / 13.317°N 169.150°W / 13.317; -169.150 (Apollo 11 splashdown)2"
+        ]
     },
     "Orbital parameters": {
         "Reference system": "Selenocentric",

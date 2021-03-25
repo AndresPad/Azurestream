@@ -1,23 +1,25 @@
 ﻿#---------------------------------------------------------[Global Variables]-----------------------------------------------------
 #region
-    $Global:CloneAuthenticationToken = $null
+    $Global:AuthenticationToken = $null
+    $Global:Scopes = $null
+    $Global:SignIn = $null
+    $Global:SignInName = $null
 
-    $activeDirectoryEndpointUrl    = "https://login.microsoftonline.com/common"  #Endpoint for Microsoft Identity Platform
     $resourceManagerEndpointUrl    = "https://management.azure.com/.default"     #Endpoint for Azure Resource Manager REST API
     $synapseDevelopmentEndpointUrl = "https://dev.azuresynapse.net/.default"     #Endpoint for Synapse Rest API
 
     $psGetDocs     = "Documentation is available at https://docs.microsoft.com/en-us/powershell/module/powershellget/?view=powershell-7.1"
     $azPSDocs      = "Documentation is available at https://docs.microsoft.com/en-us/powershell/azure/new-azureps-module-az?view=azps-5.5.0"
+    $azSynDocs     = "Documentation is available at https://docs.microsoft.com/en-us/powershell/module/az.synapse/?view=azps-5.6.0"
     $msalPSDocs    = "Documentation is available at https://www.powershellgallery.com/packages/MSAL.PS/4.2.1.3"
 
     #Default App Settings JSON
     $defaultConfigContent = '{
         "AzureSettings": {
-            "TenantID": "<fill in the Tenant ID from the Azure Portal>",
+            "TenantId": "<fill in the Tenant ID from the Azure Portal>",
             "SubscriptionId": "<fill in the Subscription ID from the Azure Portal>",
             "ClientID": "<fill in the Service Principal ID from the Azure Portal>",
-            "ClientSecret": "<fill in the Service Principal Secret from the Azure Portal>",
-            "region": "<select from available regions: australiaeast, eastus, eastus2, japaneast, northeurope, southcentralus, southeastasia, uksouth, westeurope, westus2>"
+            "ClientSecret": "<fill in the Service Principal Secret from the Azure Portal>"
         },
         "DataFactory": {
             "ResourceGroup": "<resource group name where data factory is located>",
@@ -38,31 +40,39 @@
 #region
     function CheckPrerequisites()
     {
+        #Please make sure you have the PowerShellGet Module installed and the minimum version is -MinimumVersion 2.2.5
+        #https://www.powershellgallery.com/packages/PowerShellGet/2.2.5
         $azPSGetInstalled = Get-Module -ListAvailable -Name PowerShellGet
         if (-Not $azPSGetInstalled) {
-            WriteErrorResponse "  PowerShellGet module is not installed - Install it via 'Install-Module -Name PowerShellGet -Force'. $($psGetDocs)"
-            #'Install-Module -Name PowerShellGet -Force
+            WriteErrorResponse "  PowerShellGet module is not installed - Install it via 'Install-Module -Name PowerShellGet -RequiredVersion 2.2.5 -Force'. $($psGetDocs)"
+            #Install-Module -Name PowerShellGet -RequiredVersion 2.2.5 -Force
             return $False
         }
 
+         #Please make sure you have the Az.Resources Module installed and the minimum version is -MinimumVersion 3.3.0
+         #https://www.powershellgallery.com/packages/Az.Resources/3.3.0
         $azResourcesInstalled = Get-Module -ListAvailable -Name Az.Resources
         if (-Not $azResourcesInstalled) {
-            WriteErrorResponse "  Az.Resources module is not installed - Install it via 'Install-Module -Name Az.Resources -AllowClobber -Force'. $($azPSDocs)"
-            #'Install-Module -Name Az.Resources -AllowClobber -Force
+            WriteErrorResponse "  Az.Resources module is not installed - Install it via 'Install-Module -Name Az.Resources -MinimumVersion 3.3.0 -AllowClobber -Force'. $($azPSDocs)"
+            #Install-Module -Name Az.Resources -AllowClobber -Force
             return $False
         }
 
+        #Please make sure you have the Az.Accounts Module installed and the minimum version is -MinimumVersion 2.2.6
+        #https://www.powershellgallery.com/packages/Az.Accounts/2.2.6
         $azAccountsInstalled = Get-Module -ListAvailable -Name Az.Accounts
         if (-Not $azAccountsInstalled) {
-            WriteErrorResponse "  Az.Accounts module is not installed - Install it via 'Install-Module -Name Az.Accounts -AllowClobber -Force'. $($azPSDocs)"
+            WriteErrorResponse "  Az.Accounts module is not installed - Install it via 'Install-Module -Name Az.Accounts -MinimumVersion 2.2.6 -AllowClobber -Force'. $($azPSDocs)"
             #Install-Module -Name Az.Accounts -AllowClobber -Force
             return $False
         }
 
-        $azMSALInstalled = Get-Module -ListAvailable -Name MSAL.PS
-        if (-Not $azMSALInstalled) {
-            WriteErrorResponse "  MSAL.PS module is not installed - Install it via 'Install-Module -Name MSAL.PS -AllowClobber -Force -AcceptLicense'. $($msalPSDocs)"
-            #'Install-Module -Name MSAL.PS -AllowClobber -Force -AcceptLicense
+        #Please make sure you have the Az.Synapse Module installed and the minimum version is -MinimumVersion 0.8.0
+        #https://www.powershellgallery.com/packages/Az.Synapse/0.8.0
+        $azSynapseInstalled = Get-Module -ListAvailable -Name Az.Synapse
+        if (-Not $azSynapseInstalled) {
+            WriteErrorResponse "  Az.Synapse module is not installed - Install it via 'Install-Module -Name Az.Synapse -MinimumVersion 0.8.0 -AllowClobber -Force'. $($azSynDocs)"
+            #Install-Module -Name Az.Synapse -AllowClobber -Force
             return $False
         }
 
@@ -70,87 +80,184 @@
     }
 #endregion
 
+#---------------------------------------------------------[CheckResources]-----------------------------------------------------
+#region
+  #Check if ADF, Synapse Workspace Exist
+  function CheckResources()
+  {
+    #Check if Data Factory Exists
+    $adf = Get-AzDataFactoryV2 -ResourceGroupName $config.DataFactory.ResourceGroup -Name $config.DataFactory.Name -ErrorAction Continue
+    if (-Not $adf) {
+        WriteError ("[Error] The Data Factory you are trying to access does not exist or you do not have access to it.")
+        WriteError ("Migration aborted.")
+        return $False
+    }
+
+    #Check if Synapse Workspace Exists
+    $syn = Get-AzSynapseWorkspace -ResourceGroupName $config.SynapseWorkspace.ResourceGroup -Name $config.SynapseWorkspace.Name -ErrorAction Continue
+    if (-Not $syn) {
+        WriteError ("[Error] The Synapse Workspace you are trying to access does not exist or you do not have access to it.")
+        WriteError ("Migration aborted.")
+        return $False
+    }
+
+    #Get the Role Assignment you have on your Data Factory and Synapse Workspace
+    if($Global:SignIn -eq 'S'){
+        $adfRole = Get-AzRoleAssignment -ServicePrincipalName $Global:SignInName -ResourceGroupName $config.DataFactory.ResourceGroup -ResourceName $config.DataFactory.Name -ResourceType "Microsoft.DataFactory/factories"
+        $synRole = Get-AzRoleAssignment -ServicePrincipalName $Global:SignInName -ResourceGroupName $config.SynapseWorkspace.ResourceGroup -ResourceName $config.SynapseWorkspace.Name -ResourceType "Microsoft.Synapse/workspaces"
+    }
+    else{
+        $adfRole = Get-AzRoleAssignment -SignInName $Global:SignInName -ResourceGroupName $config.DataFactory.ResourceGroup -ResourceName $config.DataFactory.Name -ResourceType "Microsoft.DataFactory/factories"
+        $synRole = Get-AzRoleAssignment -SignInName $Global:SignInName -ResourceGroupName $config.SynapseWorkspace.ResourceGroup -ResourceName $config.SynapseWorkspace.Name -ResourceType "Microsoft.Synapse/workspaces"
+    }
+
+    if (-Not $adfRole) {
+        WriteError ("The Data Factory you are trying to access does not exist or you do not have access to it.")
+        WriteError ("Migration aborted.")
+        return $False
+    }
+    else{
+        Write-Host "  Your Data Factory Role Assignment for Service Principal/User $($Global:SignInName) is: $($adfRole.RoleDefinitionName)" -ForegroundColor Blue
+    }
+
+    if (-Not $synRole) {
+        WriteError ("The Synapse Workspace you are trying to access does not exist or you do not have access to it.")
+        WriteError ("Migration aborted.")
+        return $False
+    }
+    else{
+        Write-Host "  Your Synapse Workspace Role Assignment for Service Principal/User $($Global:SignInName) is: $($synRole.RoleDefinitionName)" -ForegroundColor Blue
+    }
+
+      return $True
+  }
+
+#endregion
+
 #---------------------------------------------------------[Login]-----------------------------------------------------
 #region
-    function Login($config)
-    {
-        try
-        {
-            #Login to Azure (programmatically)
-            $pscredential = New-Object -TypeName System.Management.Automation.PSCredential($config.AzureSettings.ClientID, (ConvertTo-SecureString $config.AzureSettings.ClientSecret -AsPlainText -Force))
-            Connect-AzAccount -Credential $pscredential -Tenant $config.AzureSettings.TenantId -ServicePrincipal
+    function Login {
+        Param (
+            [object] $config,
+            [string] $signIn
+        )
+        try {
+            $context = Get-AzContext
+            if (!$context -or ($context.Subscription.Id -ne $config.AzureSettings.SubscriptionId)) {
+                #Login to Azure (programmatically)
+                if ($signIn -eq 's') {
+                    Write-Host ""
+                    Write-Host "Logging into Azure" -ForegroundColor Yellow
+                    Write-Host "Authentication Type: Service Principal (Client ID and Secret) from appSettings.json."
+                    $pscredential = New-Object -TypeName System.Management.Automation.PSCredential($config.AzureSettings.ClientID, (ConvertTo-SecureString $config.AzureSettings.ClientSecret -AsPlainText -Force))
+                    Connect-AzAccount -Credential $pscredential -Tenant $config.AzureSettings.TenantId -ServicePrincipal | Out-null
+                    Write-Host ""
+                }
+                #Login to Azure (interactively)
+                else {
+                    Write-Host ""
+                    Write-Host "Logging into Azure" -ForegroundColor Yellow
+                    Write-Host "Authentication Type: Interactively"
+                    Connect-AzAccount -Subscription $config.AzureSettings.SubscriptionId | Out-null
+                    Set-AzContext -Subscription $config.AzureSettings.SubscriptionId | Out-null
+                }
 
-            return $true
+                $context = Get-AzContext
+                if($context.Account.type -eq 'ServicePrincipal'){
+                    $Global:SignInName = $config.AzureSettings.ClientId
+                }
+                else{
+                    $Global:SignInName = $context.Account.Id
+                }
+
+                LoginContextDetails -tenantcontext $context.Tenant.Id -subscriptioncontext $config.AzureSettings.SubscriptionId -usercontext $(if ($signIn -eq 'S') { 'ServicePrincipal' } else { 'User' })
+            }
+            else
+            {
+                LoginContextDetails $context.Subscription.Id $context.Tenant.Id $context.Account.type
+            }
         }
         catch {
-            WriteErrorResponse "You were not able to log in. Please check the Service Principal Client ID and Secret or log in via the Connect-AzAccount command"
-            Write-Host $_
+            Write-Host ""
+            WriteError $_
+            WriteErrorResponse "  You were not able to login. Please check your appsettings.json file or log in interactively via the Connect-AzAccount command"
             throw
         }
     }
 
     #-------------------------------------------------------------------
-    function CheckLogin()
-    {
+    function CheckLogin() {
         $context = Get-AzContext
         if (!$context)
         {
-            WriteErrorResponse "Not logged into a subscription. You need to log in via the Connect-AzAccount command."
+            Write-Host ""
+            WriteErrorResponse "  You are NOT currently logged into Azure."
+            Write-Host ""
             return $False
         }
 
-        Write-Host "#--------------------------------------------------------------------------------------------------------"
-        WriteSuccess "  Logged into Subscription: '$($context.Name)' TenantId: '$($context.Tenant.Id)'"
-        Write-Host "#--------------------------------------------------------------------------------------------------------"
+        if($context.Account.type -eq 'ServicePrincipal'){
+            $Global:SignInName = $config.AzureSettings.ClientId
+            $Global:SignIn = "S"
+        }
+        else{
+            $Global:SignInName = $context.Account.Id
+            $Global:SignIn = "I"
+        }
+
+        LoginContextDetails $context.Subscription.Id $context.Tenant.Id $context.Account.type
 
         return $True
     }
 
     #-------------------------------------------------------------------
-    function GetAuthenticationToken() {
-        if ($Global:CloneAuthenticationToken) {
-            return $Global:CloneAuthenticationToken
-        }
-        else {
-            WriteLine
-            WriteInformation ("Getting an authentication token ...")
+    function LoginContextDetails() {
+        Param (
+            [string] $tenantcontext,
+            [string] $subscriptioncontext,
+            [string] $usercontext
+        )
 
-            if ($Global:CloneAuthenticationToken -eq $true) {
-                #$Global:CloneAuthenticationToken = (Get-MsalToken -ClientId $config.AzureSettings.ClientID -Scope  $resourceManagerEndpointUrl -RedirectUri "http://localhost" -Authority "$activeDirectoryEndpointUrl/$($config.AzureSettings.TenantID)").AccessToken
-                 $Global:CloneAuthenticationToken = (Get-MsalToken -ClientId $config.AzureSettings.ClientID -ClientSecret (ConvertTo-SecureString $config.AzureSettings.ClientSecret -AsPlainText -Force) -TenantId $config.AzureSettings.TenantID -Scope 'https://management.azure.com/.default').AccessToken
-                return $Global:CloneAuthenticationToken
-            }
-
-            $Global:CloneAuthenticationToken = (Get-MsalToken -ClientId $config.AzureSettings.ClientID -Scope $synapseDevelopmentEndpointUrl -RedirectUri "http://localhost" -Authority "$activeDirectoryEndpointUrl/$($config.AzureSettings.TenantID)").AccessToken
-            return $Global:CloneAuthenticationToken
-        }
+        Write-Host ""
+        Write-Host "#--------------------------------------------------------------------------------------------------------"
+        WriteSuccess "  You are currently logged into Subscription: '$($subscriptioncontext)' TenantId: '$($tenantcontext)' Context: '$($usercontext)'"
+        Write-Host "#--------------------------------------------------------------------------------------------------------"
+        Write-Host ""
     }
 
     #-------------------------------------------------------------------
-    function GetHeader {
+    function GetAuthenticationToken {
         Param (
-            [bool]$armToken
+            [bool] $armToken,
+            [string] $signIn
         )
 
-            $token = AcquireToken -armToken $armToken
-
-            return @{
-                'Authorization' = "Bearer $token"
+        try {
+            if ($armToken -eq $true) {
+                $token = Get-AzAccessToken -ResourceTypeName Arm
+                $Global:AuthenticationToken = $token.Token
             }
-    }
+            else{
+                $token = Get-AzAccessToken -ResourceTypeName Synapse
+                $Global:AuthenticationToken = $token.Token
+            }
 
-    #-------------------------------------------------------------------
-    function AcquireToken {
-        Param (
-            [bool]$armToken
-        )
-
-
-        if ($armToken -eq $true) {
-            return (Get-MsalToken -ClientId $config.AzureSettings.ClientID -ClientSecret (ConvertTo-SecureString $config.AzureSettings.ClientSecret -AsPlainText -Force) -TenantId $config.AzureSettings.TenantID -Scope 'https://management.azure.com/.default').AccessToken
+            if ($Global:AuthenticationToken){
+                return $Global:AuthenticationToken
+            }
+            else{
+                Write-Host
+                Write-Host "Authorization Access Token is null, please stop the script and re-run authentication..." -ForegroundColor Red
+                Write-Host
+                break
+            }
         }
-
-        return (Get-MsalToken -ClientId $config.AzureSettings.ClientID -ClientSecret (ConvertTo-SecureString $config.AzureSettings.ClientSecret -AsPlainText -Force) -TenantId $config.AzureSettings.TenantID -Scope 'https://dev.azuresynapse.net/.default').AccessToken
+        catch{
+            write-host $_.Exception.Message -f Red
+            write-host $_.Exception.ItemName -f Red
+            write-host
+            break
+        }
     }
 #endregion
 
@@ -163,16 +270,24 @@
 
     function LoadConfig(
         [string] $fileLocation,
-        [string] $TenantID,
+        [string] $TenantId,
         [string] $SubscriptionId,
         [string] $ResourceGroupDataFactory,
         [string] $DataFactoryName,
         [string] $ResourceGroupSynapse,
-        [string] $SynapseName
+        [string] $SynapseName,
+        [string] $ClientID,
+        [string] $ClientSecret,
+        [string] $SourceADFResourceId,
+        [string] $DestSynapseResourceId,
+        [string] $ADFAPIVersion,
+        [string] $SynapseAPIVersion
     ) {
 
         try {
-            $configFromFile = Get-Content -Path $fileLocation -Raw | ConvertFrom-Json
+            if(-NOT [string]::IsNullOrEmpty($fileLocation)){
+                $configFromFile = Get-Content -Path $fileLocation -Raw | ConvertFrom-Json
+            }
         }
         catch {
             WriteError("Could not parse config json file at: $fileLocation. Please ensure that it is a valid json file (use a json linter, often a stray comma can make your file invalid)")
@@ -181,27 +296,30 @@
 
         $defaultConfig = GetDefaultConfig
         $config = $defaultConfig
-        if ([bool]($configFromFile | get-member -name "AzureSettings")) {
-            $configFromFile.AzureSettings.psobject.properties | ForEach-Object {
-                $config.AzureSettings | Add-Member -MemberType $_.MemberType -Name $_.Name -Value $_.Value -Force
-            }
-        }
 
-        if ([bool]($configFromFile | get-member -name "DataFactory")) {
-            $configFromFile.DataFactory.psobject.properties | ForEach-Object {
-                $config.DataFactory | Add-Member -MemberType $_.MemberType -Name $_.Name -Value $_.Value -Force
+        if(-NOT [string]::IsNullOrEmpty($fileLocation)){
+            if ([bool]($configFromFile | get-member -name "AzureSettings")) {
+                $configFromFile.AzureSettings.psobject.properties | ForEach-Object {
+                    $config.AzureSettings | Add-Member -MemberType $_.MemberType -Name $_.Name -Value $_.Value -Force
+                }
             }
-        }
 
-        if ([bool]($configFromFile | get-member -name "SynapseWorkspace")) {
-            $configFromFile.SynapseWorkspace.psobject.properties | ForEach-Object {
-                $config.SynapseWorkspace | Add-Member -MemberType $_.MemberType -Name $_.Name -Value $_.Value -Force
+            if ([bool]($configFromFile | get-member -name "DataFactory")) {
+                $configFromFile.DataFactory.psobject.properties | ForEach-Object {
+                    $config.DataFactory | Add-Member -MemberType $_.MemberType -Name $_.Name -Value $_.Value -Force
+                }
+            }
+
+            if ([bool]($configFromFile | get-member -name "SynapseWorkspace")) {
+                $configFromFile.SynapseWorkspace.psobject.properties | ForEach-Object {
+                    $config.SynapseWorkspace | Add-Member -MemberType $_.MemberType -Name $_.Name -Value $_.Value -Force
+                }
             }
         }
 
         #Override App Settings Tenant ID
-        if (-Not [string]::IsNullOrEmpty($TenantID)) {
-            $config.AzureSettings.TenantID = $TenantID
+        if (-Not [string]::IsNullOrEmpty($TenantId)) {
+            $config.AzureSettings.TenantId = $TenantId
         }
 
         #Override App Settings Subscription ID
@@ -229,8 +347,30 @@
             $config.SynapseWorkspace.Name = $SynapseName
         }
 
-        $config.DataFactory.ResourceId = "/subscriptions/$($config.AzureSettings.SubscriptionId)/resourceGroups/$($config.DataFactory.ResourceGroup)/providers/Microsoft.DataFactory/factories/$($config.DataFactory.Name)"
-        $config.SynapseWorkspace.ResourceId = "/subscriptions/$($config.AzureSettings.SubscriptionId)/resourceGroups/$($config.SynapseWorkspace.ResourceGroup)/providers/Microsoft.Synapse/workspaces/$($config.SynapseWorkspace.Name)"
+        if(-NOT [string]::IsNullOrEmpty($fileLocation)){
+            $config.DataFactory.ResourceId = "/subscriptions/$($config.AzureSettings.SubscriptionId)/resourceGroups/$($config.DataFactory.ResourceGroup)/providers/Microsoft.DataFactory/factories/$($config.DataFactory.Name)"
+            $config.SynapseWorkspace.ResourceId = "/subscriptions/$($config.AzureSettings.SubscriptionId)/resourceGroups/$($config.SynapseWorkspace.ResourceGroup)/providers/Microsoft.Synapse/workspaces/$($config.SynapseWorkspace.Name)"
+        }
+
+        #Override App Settings Synapse ResourceID Entry
+        if (-Not [string]::IsNullOrEmpty($sourceADFResourceId)) {
+            $config.DataFactory.ResourceId = $sourceADFResourceId
+        }
+
+        #Override App Settings Synapse ResourceID Entry
+        if (-Not [string]::IsNullOrEmpty($destSynapseResourceId)) {
+            $config.SynapseWorkspace.ResourceId = $destSynapseResourceId
+        }
+
+        #Override App Settings ADF apiVersion
+        if (-Not [string]::IsNullOrEmpty($ADFAPIVersion)) {
+            $config.DataFactory.apiVersion = $ADFAPIVersion
+        }
+
+        #Override App Settings Synapse apiVersion
+        if (-Not [string]::IsNullOrEmpty($SynapseAPIVersion)) {
+            $config.SynapseWorkspace.apiVersion = $SynapseAPIVersion
+        }
 
         return $config
     }
@@ -238,27 +378,35 @@
 
 #---------------------------------------------------------[Format Output Messages]-----------------------------------------------------
 #region
+    function CustomWriteHost($str) {
+        Write-Host "$(Get-Date) : $str"
+    }
+
+    function CustomWriteHostError($str) {
+        Write-Host "$(Get-Date) : $str" -ForegroundColor Red
+    }
+
     function WriteError([string] $message) {
-        Write-Host -ForegroundColor Red $message;
+        Write-Host -ForegroundColor Red "$(Get-Date) : $message";
     }
 
     function WriteSuccess([string] $message) {
-        Write-Host -ForegroundColor Green $message;
+        Write-Host -ForegroundColor Green "$(Get-Date) : $message";
     }
     function WriteSuccessResponse([string] $message) {
         Write-Host -ForegroundColor Green "#--------------------------------------------------------------------------------------------------------";
-        WriteInformation($message)
+        WriteInformation("$message")
         Write-Host -ForegroundColor Green "#--------------------------------------------------------------------------------------------------------";
     }
 
     function WriteErrorResponse([string] $message) {
         Write-Host -ForegroundColor Red "#--------------------------------------------------------------------------------------------------------";
-        WriteInformation($message)
+        WriteInformation("$(Get-Date) : $message")
         Write-Host -ForegroundColor Red "#--------------------------------------------------------------------------------------------------------";
     }
 
     function WriteInformation([string] $message) {
-        Write-Host -ForegroundColor White $message;
+        Write-Host -ForegroundColor White "$(Get-Date) : $message";
     }
 
     function WriteLine {
