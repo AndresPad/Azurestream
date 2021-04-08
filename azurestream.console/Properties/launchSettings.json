@@ -1,7 +1,14 @@
 {
   "profiles": {
     "azurestream.console": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "environmentVariables": {
+        "DevicePrefix": "testdevice",
+        "IotHubConnectionString": "HostName=YOURIOTHUB.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=YOURSHAREDACCESSKEY",
+        "DeviceCount": "10",
+        "Operation": "Create", //Change Operation to Create or Delete depending on the Operation you want to complete
+        "ConfirmDelete": "yes"
+      }
     },
     "Docker": {
       "commandName": "Docker"

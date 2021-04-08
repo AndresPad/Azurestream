@@ -1,47 +1,53 @@
-﻿using Microsoft.Azure.Search;
-using Microsoft.Azure.Search.Models;
-using Newtonsoft.Json;
+﻿using Azure.Search.Documents.Indexes;
+using Azure.Search.Documents.Indexes.Models;
+using Microsoft.Spatial;
 using System;
+using System.Text.Json.Serialization;
 
 namespace azurestream.console.Models
 {
-    [SerializePropertyNamesAsCamelCase]
     public partial class Hotel
     {
-        [System.ComponentModel.DataAnnotations.Key]
-        [IsFilterable]
+        [SimpleField(IsKey = true, IsFilterable = true)]
         public string HotelId { get; set; }
 
-        [IsSearchable, IsFilterable, IsSortable]
+        [SearchableField(IsSortable = true)]
         public string HotelName { get; set; }
 
-        [IsFilterable, IsSortable, IsFacetable]
-        public int? Rating { get; set; }
-
-        [IsSearchable, IsFilterable, IsSortable, IsFacetable]
-        public string Category { get; set; }
-
-        [IsSearchable]
+        [SearchableField(AnalyzerName = LexicalAnalyzerName.Values.EnLucene)]
         public string Description { get; set; }
 
-        [IsSearchable]
-        [Analyzer(AnalyzerName.AsString.FrLucene)]
-        [JsonProperty("description_fr")]
+        [SearchableField(AnalyzerName = LexicalAnalyzerName.Values.FrLucene)]
+        [JsonPropertyName("Description_fr")]
         public string DescriptionFr { get; set; }
 
-        [IsFilterable, IsSortable, IsFacetable]
-        public double? BaseRate { get; set; }
+        [SearchableField(IsFilterable = true, IsSortable = true, IsFacetable = true)]
+        public string Category { get; set; }
 
-        [IsSearchable, IsFilterable, IsFacetable]
+        [SearchableField(IsFilterable = true, IsFacetable = true)]
         public string[] Tags { get; set; }
 
-        [IsFilterable, IsFacetable]
+        [SimpleField(IsFilterable = true, IsSortable = true, IsFacetable = true)]
         public bool? ParkingIncluded { get; set; }
 
-        [IsFilterable, IsFacetable]
-        public bool? SmokingAllowed { get; set; }
+        // SmokingAllowed reflects whether any room in the hotel allows smoking.
+        // The JsonIgnore attribute indicates that a field should not be created 
+        // in the index for this property and it will only be used by code in the client.
+        [JsonIgnore]
+        public bool? SmokingAllowed => (Rooms != null) ? Array.Exists(Rooms, element => element.SmokingAllowed == true) : (bool?)null;
 
-        [IsFilterable, IsSortable, IsFacetable]
+        [SimpleField(IsFilterable = true, IsSortable = true, IsFacetable = true)]
         public DateTimeOffset? LastRenovationDate { get; set; }
+
+        [SimpleField(IsFilterable = true, IsSortable = true, IsFacetable = true)]
+        public double? Rating { get; set; }
+
+        [SearchableField]
+        public Address Address { get; set; }
+
+        [SearchableField(IsFilterable = true, IsSortable = true)]
+        public GeographyPoint Location { get; set; }
+
+        public Room[] Rooms { get; set; }
     }
 }

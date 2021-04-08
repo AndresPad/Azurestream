@@ -15,8 +15,16 @@ namespace azurestream.console
 
 
             //------------------------------------------------------------------------------------------------------
+            //Azure IoT
+            //await SimulatedDeviceSample1.ExecuteAsync(args);
+            //await SimulatedDeviceSample2.ExecuteAsync(args);
+            //await DeviceProvisioningSample1.ExecuteAsync(args);
+            //await DeviceProvisioningSample2.ExecuteAsync();
+            //await DeviceProvisioningSample3.ExecuteAsync();
+
+            //------------------------------------------------------------------------------------------------------
             //AI Cognative Services
-            //SearchIndex.Execute();                                        //---Demo Azure Search
+            //CognitiveSearch.Execute();                                        //---Demo Azure Search
             //await AIKeyPhraseExtractionSample.Execute();
             //await AILanguageDetectionSample.Execute();
             //await AIRecognizeEntitiesSample.Execute();
@@ -30,6 +38,7 @@ namespace azurestream.console
             //await CosmosDBBulkDemo.Execute();                           //Demo - Optimize throughput when bulk importing data to Azure Cosmos DB SQL API account
             //await CosmosDBDemo1_CreatePartitionedContainer.Execute();
 
+            //------------------------------------------------------------------------------------------------------
 
             await Task.Delay(10);
             Console.WriteLine("\n\n---------------------------------------");
