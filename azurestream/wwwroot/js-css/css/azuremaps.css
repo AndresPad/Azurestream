@@ -1,0 +1,57 @@
+﻿html,
+body {
+    margin: 0;
+}
+
+#myMap {
+    height: 100vh;
+    width: 100vw;
+}
+
+.popup-content-container {
+    border-radius: 14px;
+}
+
+    .popup-content-container .popup-close {
+        color: #ffffff;
+        top: 3px;
+        right: 6px;
+    }
+
+.popup-container.bottom > .popup-arrow,
+.popup-container.top > .popup-arrow {
+    border-bottom-color: #0099ff;
+    border-top-color: #0099ff;
+}
+
+.popup-dialog {
+    min-width: 100px;
+    min-height: 100px;
+    padding: 8px;
+    background-color: #0099ff;
+    color: #ffffff;
+    border-radius: 14px;
+}
+
+    .popup-dialog .header {
+        font-size: 16px;
+        font-weight: 600;
+        padding-left: 2px;
+        padding-right: 2px;
+        padding-bottom: 4px;
+        text-transform: capitalize;
+        letter-spacing: 2px;
+    }
+
+    .popup-dialog .details {
+        padding-left: 4px;
+        padding-right: 4px;
+        border-radius: 4px;
+        font-size: 14px;
+        letter-spacing: 1.1px;
+    }
+
+.lat-lon-label {
+    min-width: 34px;
+    display: inline-block;
+}

@@ -13,10 +13,15 @@ namespace azurestream.console
             Console.WriteLine("Starting:" + System.Reflection.Assembly.GetExecutingAssembly().GetName().ToString());
             Console.WriteLine("-------------------------------------------------------------------------------------\n\n");
 
+            //------------------------------------------------------------------------------------------------------
+            //Azure Data Explorer (ADX)
+            //AzADX_GitHubToADX.Execute();
 
             //------------------------------------------------------------------------------------------------------
             //Azure IoT
-            //await SimulatedDeviceSample1.ExecuteAsync(args);
+            await SimulatedDeviceSample_RandomTelemetry.ExecuteAsync();
+            //await SimulatedDeviceSample_RandomVibration.ExecuteAsync(args);
+            //await SimulatedDeviceSample_RandomTemp.ExecuteAsync(args);
             //await SimulatedDeviceSample2.ExecuteAsync(args);
             //await DeviceProvisioningSample1.ExecuteAsync(args);
             //await DeviceProvisioningSample2.ExecuteAsync();
@@ -46,7 +51,6 @@ namespace azurestream.console
             Console.WriteLine("---------------------------------------");
             Console.WriteLine("\n\nPress ENTER to exit");
             Console.ReadLine();
-
         }
     }
 }

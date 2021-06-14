@@ -1,5 +1,7 @@
-﻿using Azure.Messaging.EventHubs;
+﻿using apa.BOL.EventHubs;
+using Azure.Messaging.EventHubs;
 using Azure.Messaging.EventHubs.Producer;
+using azurestream.eventhubs.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,31 +10,31 @@ using System.Threading.Tasks;
 
 namespace azurestream.eventhubs
 {
+    //Sample generates random credit card data.
     //----------------------------------------------------------------------------------------------------------
     public class CreditCardEventCreator
     {
-        private const string EventHubNamespaceConnectionString = "Endpoint=sb://YOUREVENTHUBNAMESPACE.servicebus.windows.net/;SharedAccessKeyName=anomalies;SharedAccessKey=YOURTOKEN";
-        private const string EventHubName = "YOUREVENTHUB";
+        private const string EventHubNamespaceCnx = "Endpoint=sb://YOUREVENTHUBNAMESPACE.servicebus.windows.net/;SharedAccessKeyName=YOURSHAREDACCESSPOLICY;SharedAccessKey=YOURACCESSKEY";
+        private const string EventHubName = "anomaly-eh";
         private const string TransactionsDumpFile = "mocktransactions.csv";
         private static EventHubProducerClient producerClient;
         //------------------------------------------------------------------------------------------------------
         internal static void Execute(string[] args)
         {
-            Console.WriteLine("Ready to start collecting");
+            Console.WriteLine("Registering Event Hub Client...");
+            Console.WriteLine("Ready to start sending messages to Event Hub:" + EventHubName);
 
             MainAsync(args).GetAwaiter().GetResult();
       
-            Console.WriteLine("Receiving. Press enter key to stop worker.");
+            Console.WriteLine("Receiving Messages. Press enter key to stop worker.");
             Console.ReadLine();
         }
 
         //--------------------------------------------------------------------------------------------------------------
         static async Task MainAsync(string[] args)
         {
-            Console.WriteLine("Hello Azure EventHubs!");
-
-            // create an Event Hubs Producer client using the namespace connection string and the event hub name
-            producerClient = new EventHubProducerClient(EventHubNamespaceConnectionString, EventHubName);
+            //create an Event Hubs Producer client using the namespace connection string and the event hub name
+            producerClient = new EventHubProducerClient(EventHubNamespaceCnx, EventHubName);
 
             // send messages to the event hub
             await SendMessagesToEventHubAsync(10000);

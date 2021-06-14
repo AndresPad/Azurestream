@@ -14,13 +14,13 @@ namespace azurestream.console
     //--------------------------------------------------------------------------------------------------------------
     public class DeviceProvisioningSample2
     {
-        private const string dpsGlobalDeviceEndpoint = "YOURDPS.azure-devices-provisioning.net";
+        private const string dpsGlobalDeviceEndpoint = "azurestream.azure-devices-provisioning.net";
         private const string dpsIdScope = "YOURDPSIDSCOPE";
 
         // TODO: set your certificates info here:
         private const string deviceCertificatePassword = @"YOURCERTIFICATEPASSWORD";
-        private const string device1CertificateFileName = @"C:\Azure\IoT\Certificates\DemoDevice1.pfx";
-        private const string device2CertificateFileName = @"C:\Azure\IoT\Certificates\DemoDevice2.pfx";
+        private const string device1CertificateFileName = @"C:\Git\AZURESTREAM\azurestream.console\Azure\IoT\Certificates\DemoDevice1.pfx";
+        private const string device2CertificateFileName = @"C:\Git\AZURESTREAM\azurestream.console\Azure\IoT\Certificates\DemoDevice2.pfx";
 
         private static readonly ConsoleColor defaultConsoleForegroundColor = Console.ForegroundColor;
         //----------------------------------------------------------------------------------------------------------

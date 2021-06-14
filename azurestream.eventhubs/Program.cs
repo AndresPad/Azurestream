@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace azurestream.eventhubs
 {
@@ -6,7 +7,7 @@ namespace azurestream.eventhubs
     class Program
     {
         //----------------------------------------------------------------------------------------------------------
-        internal static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Console.WriteLine("-------------------------------------------------------------------------------------");
             Console.WriteLine("Starting:" + System.Reflection.Assembly.GetExecutingAssembly().GetName().ToString());
@@ -14,10 +15,13 @@ namespace azurestream.eventhubs
 
             //------------------------------------------------------------------------------------------------------
             //Event Hubs
-            string[] args1 = { "Hello World", "Joe", "Bloggs" };
-            CreditCardEventCreator.Execute(args1);
-            PollutionDataCollector.Execute(args1);
+            //await SendSampleData.ExecuteAsync();
+            //DredgerEventCreator.Execute();
+            //await StormEventsData.ExecuteAsync();
+            //CreditCardEventCreator.Execute(args1);
+            //PollutionDataCollector.Execute(args1);
 
+            await Task.Delay(10);
             Console.WriteLine("\n\n---------------------------------------");
             Console.WriteLine("Ending Application");
             Console.WriteLine("---------------------------------------");

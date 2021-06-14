@@ -1,12 +1,14 @@
-using System;
+using apa.BOL.EventHubs;
 using azurestream.eventhubs.Helpers;
-using azurestream.eventhubs.Models;
+using System;
 
 namespace azurestream.eventhubs.Business
 {
+    //----------------------------------------------------------------------------------------------------------
     public class PollutionCollector : IPollutionCollector
     {
-        // Collect polution data
+        // Collect pollution data
+        //------------------------------------------------------------------------------------------------------
         public PollutionData Collect()
         {
             return new PollutionData() {

@@ -43,6 +43,7 @@ namespace azurestream.console
             Console.ReadKey();
         }
 
+        //------------------------------------------------------------------------------------------------------
         private static SearchIndexClient CreateSearchIndexClient(IConfigurationRoot configuration)
         {
             string searchServiceEndPoint = configuration["SearchServiceEndPoint"];
@@ -61,6 +62,7 @@ namespace azurestream.console
             return searchClient;
         }
 
+        //------------------------------------------------------------------------------------------------------
         private static void DeleteIndexIfExists(string indexName, SearchIndexClient indexClient)
         {
             try
@@ -87,6 +89,7 @@ namespace azurestream.console
             indexClient.CreateOrUpdateIndex(definition);
         }
 
+        //------------------------------------------------------------------------------------------------------
         private static void UploadDocuments(SearchClient searchClient)
         {
             IndexDocumentsBatch<Models.Hotel> batch = IndexDocumentsBatch.Create(

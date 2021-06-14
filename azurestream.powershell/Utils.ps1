@@ -92,6 +92,18 @@
         WriteError ("Migration aborted.")
         return $False
     }
+    else {
+        if ($adf.RepoConfiguration) {
+            Write-Host("[Note] Azure Data Factory is connected to a Git repository")
+            Write-Host("[Note] Migration will only migrate ADF objects that have been published to the ADF Service. ")
+            Write-Host("[Note] Please publish all your changes to ADF Live before running the migration script")
+
+        }
+        else {
+            Write-Host("ADF is not connected to a Git repository")
+        }
+
+    }
 
     #Check if Synapse Workspace Exists
     $syn = Get-AzSynapseWorkspace -ResourceGroupName $config.SynapseWorkspace.ResourceGroup -Name $config.SynapseWorkspace.Name -ErrorAction Continue
@@ -117,16 +129,16 @@
         return $False
     }
     else{
-        Write-Host "  Your Data Factory Role Assignment for Service Principal/User $($Global:SignInName) is: $($adfRole.RoleDefinitionName)" -ForegroundColor Blue
+        Write-Host "Data Factory Role Assignment for Service Principal/User $($Global:SignInName) is: $($adfRole.RoleDefinitionName)" -ForegroundColor Green
     }
 
     if (-Not $synRole) {
-        WriteError ("The Synapse Workspace you are trying to access does not exist or you do not have access to it.")
+        WriteError ("The Synapse Analytics Workspace you are trying to access does not exist or you do not have access to it.")
         WriteError ("Migration aborted.")
         return $False
     }
     else{
-        Write-Host "  Your Synapse Workspace Role Assignment for Service Principal/User $($Global:SignInName) is: $($synRole.RoleDefinitionName)" -ForegroundColor Blue
+        Write-Host "Synapse Workspace Role Assignment for Service Principal/User $($Global:SignInName) is: $($synRole.RoleDefinitionName)" -ForegroundColor Green
     }
 
       return $True
@@ -139,7 +151,8 @@
     function Login {
         Param (
             [object] $config,
-            [string] $signIn
+            [string] $signIn,
+            [string] $tenantId
         )
         try {
             $context = Get-AzContext
@@ -158,8 +171,21 @@
                     Write-Host ""
                     Write-Host "Logging into Azure" -ForegroundColor Yellow
                     Write-Host "Authentication Type: Interactively"
-                    Connect-AzAccount -Subscription $config.AzureSettings.SubscriptionId | Out-null
-                    Set-AzContext -Subscription $config.AzureSettings.SubscriptionId | Out-null
+                    
+                    # get the subscription info
+                    if (-NOT [string]::IsNullOrEmpty($tenantId) ) {
+                        #Login with Tentant Id
+                        Connect-AzAccount -SubscriptionId $config.AzureSettings.SubscriptionId -TenantId $tenantId
+                    }
+                    else {
+                        Connect-AzAccount -SubscriptionId $config.AzureSettings.SubscriptionId
+
+                        # Set the right Tenant ID
+                        $subscription = Get-AzSubscription -SubscriptionId $config.AzureSettings.SubscriptionId
+
+                        Write-Host "Setting AzContext "
+                        Set-AzContext -SubscriptionId $subscription.Id -TenantId $subscription.TenantId
+                    }                   
                 }
 
                 $context = Get-AzContext
@@ -220,7 +246,10 @@
 
         Write-Host ""
         Write-Host "#--------------------------------------------------------------------------------------------------------"
-        WriteSuccess "  You are currently logged into Subscription: '$($subscriptioncontext)' TenantId: '$($tenantcontext)' Context: '$($usercontext)'"
+        WriteSuccess "  You are currently logged into the following Subscription: "
+        WriteSuccess "   SubscriptionId: '$($subscriptioncontext)' "
+        WriteSuccess "   TenantId: '$($tenantcontext)' "
+        WriteSuccess "   Context: '$($usercontext)'"
         Write-Host "#--------------------------------------------------------------------------------------------------------"
         Write-Host ""
     }

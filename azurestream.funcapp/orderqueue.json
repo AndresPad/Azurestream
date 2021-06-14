@@ -1,0 +1,8 @@
+﻿{
+  "PartitionKey": "Orders",
+  "RowKey": "30",
+  "OrderId": "30",
+  "ProductId": "30",
+  "Email": "andres.padilla@azurestream.io",
+  "Price": "23.0"
+}
