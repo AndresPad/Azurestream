@@ -18,8 +18,9 @@ namespace azurestream.eventhubs
             //await SendSampleData.ExecuteAsync();
             //DredgerEventCreator.Execute();
             //await StormEventsData.ExecuteAsync();
-            //CreditCardEventCreator.Execute(args1);
-            //PollutionDataCollector.Execute(args1);
+            //await TaxiEventsData.ExecuteAsync();
+            CreditCardEventCreator.Execute(args);
+            //PollutionDataCollector.Execute(args);
 
             await Task.Delay(10);
             Console.WriteLine("\n\n---------------------------------------");

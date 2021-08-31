@@ -1,5 +1,5 @@
 # Introduction 
-This Repo contains a .NET 3.1 Visual 2019 Project called **Azurestream**. This Project was built for the purposes of giving Azure Engineers
+This Repo contains a .NET 5.0 Visual 2019 Project called **Azurestream**. This Project was built for the purposes of giving Azure Engineers
 a functioning Visual Studio 2019 and Visual Studio Code Project that they could leverage for demos, presentations or simply just improving
 their C# and Azure skills. The solution contains a number of demos that could come in extremely useful during your deliveries.
 
@@ -12,7 +12,7 @@ Getting your code up and running on their own system.
 <br/><br/>
 2.	Open **C:\Git\azurestream\azurestream\azurestream.ARM\1.Environment Installs.txt** and make sure you have the following installed
     - Demo Possibilities:	
-    - .NET Core 3.1
+    - .NET Core 5.0
     - Azure CLI
     - Visual Studio 2019 - Community Edition is fine. 
     - Visual Studio Code and Extensions

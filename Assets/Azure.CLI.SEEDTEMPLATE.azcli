@@ -3,7 +3,7 @@
     <#
       =========================================================================================================
       Created by:       Author: Your Name | @twitterhandle | your.name@azurestream.io | azurestream.io
-      Created on:       06/01/2020
+      Created on:       08/31/2020
       =========================================================================================================
 
      .SUBSCRIPTION(s): PRODUCTION and R&D
@@ -107,3 +107,18 @@
     az role assignment create --role Owner --assignee-object-id xxxxxxxxx-xxxxxxx-xxxxxx-xxxxx-xxxxxxxxx --scope /subscriptions/55f0e925-6d88-460f-abac-052cdcf22aef
 #endregion
 
+#---------------------------------------------------------[IOT HUB]------------------------------------------
+#region IoT Hub Create Device
+    #https://docs.microsoft.com/en-us/cli/azure/iot/device?view=azure-cli-latest#az_iot_device_simulate
+
+    az iot hub device-identity create --device-id electron1 --hub-name azurestream
+    az iot hub device-identity create --device-id mxdevice1 --hub-name azurestream 
+    az iot hub device-identity connection-string show --device-id mxdevice1 --hub-name azurestream --output table
+    #Simulate a device in an Azure IoT Hub.
+    az iot device simulate -d electron1 -n azurestream
+    #Monitor device telemetry & messages sent to an IoT Hub. 
+    az iot hub monitor-events --output table --hub-name azurestream 
+    #Get the details of an IoT Hub device.
+    az iot hub device-identity show --device-id electron1 --hub-name azurestream 
+    az iot hub device-identity show --device-id mxdevice1 --hub-name azurestream 
+#endregion
