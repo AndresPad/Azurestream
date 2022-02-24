@@ -1,5 +1,5 @@
 # Introduction 
-This Repo contains a .NET 5.0 Visual 2019 Project called **Azurestream**. This Project was built for the purposes of giving Azure Engineers
+This Repo contains a .NET 6.0 Visual 2022 Project called **Azurestream**. This Project was built for the purposes of giving Azure Engineers
 a functioning Visual Studio 2019 and Visual Studio Code Project that they could leverage for demos, presentations or simply just improving
 their C# and Azure skills. The solution contains a number of demos that could come in extremely useful during your deliveries.
 
@@ -12,9 +12,9 @@ Getting your code up and running on their own system.
 <br/><br/>
 2.	Open **C:\Git\azurestream\azurestream\azurestream.ARM\1.Environment Installs.txt** and make sure you have the following installed
     - Demo Possibilities:	
-    - .NET Core 5.0
+    - .NET Core 6.0
     - Azure CLI
-    - Visual Studio 2019 - Community Edition is fine. 
+    - Visual Studio 2022 - Community Edition is fine. 
     - Visual Studio Code and Extensions
     - Postman
 <br/><br/>
@@ -26,6 +26,8 @@ Getting your code up and running on their own system.
     - AZURE KEY VAULT
     - AZURE REDIS CACHE INSTANCE
     - AZURE BLOB STORAGE ACCOUNT
+    - AZURE IOT
+    - AZURE SIGNALR
     - AZURE SQL DB 
     - AZURE COSMOSDB
     - Web APP and App Insights Instance
@@ -45,18 +47,8 @@ Getting your code up and running on their own system.
     - To get the Azurestream.AD.WebApp website to work:
         - **C:\Git\azurestream\azurestream\azurestream.AD.WebApp\appsettings.json**
             - Configure Azure AD Domain, Tenant and Service Principal Introduction
-    - To get the Azurestream.API to work:
-        - **C:\Git\azurestream\azurestream\azurestream.api\appsettings.json**
-            - Configure Redis and SQL Connections
-        - **C:\Git\azurestream\azurestream\azurestream.api\azurekeyvault.json**
-            - Configure Connection to Azure Key Vault
-    - To get the Azurestream.ARM to work:
-        - **C:\Git\azurestream\azurestream\azurestream.ARM\Azure.CLI.azcli**
-            - Configure your Subscription, Tenant, ServicePrincipal
     - To get the Azurestream.console to work:
         - **C:\Git\azurestream\azurestream\azurestream.console\App.config**
-        - **C:\Git\azurestream\azurestream\azurestream.console\azureauth.properties**
-        - **C:\Git\azurestream\azurestream\azurestream.console\azureauth.txt**
             - Configure your connections and subscription and Tenant
     - To get the Azurestream.FuncAPP to work:
         - **C:\Git\azurestream\azurestream\azurestream.funcapp\local.settings.json**
@@ -64,64 +56,23 @@ Getting your code up and running on their own system.
 <br/><br/>
         
 # Contents
-1.	**Azurestream** (.NET Core 3.1 Web Project) 
+1.	**Azurestream** (.NET Core 6.0 Web Project) 
     - Demo Possibilities:
         - Demo how to connect to Azure Key Vault
         - Demo how to connect to Azure Redis Cache, populate Key/Values in cache and use an invalidation policy.
         - Demo how to use Application Insights and properly configure the SDK on both the client and server sides.
         - Demo how to configure Azure AD Authentication and bring back an Authentication Token
         - Demo how to use NLog and send logs to Blob Storage Containers.
-        - Demo how to run web app in Docker Container, and also explain what a Docker file
 <br/><br/>
-![Screenshot of the staging deployment slot to test the deployments](Assets/images/AzurestreamSolution.jpg)
 ![Screenshot of the staging deployment slot to test the deployments](Assets/images/azurestreamhomepage2.jpg)
-2.	**Azurestream.AD.WebApp** (.NET Core 3.1 Web Project) 
-    - Bare-Bones Website 
-        - Simple application that gives you what you need to demo Azure AD Authentication
+5.	**Azurestream.Console** (.Net Core 6.0 Console Application) 
     - Demo Possibilities:
-        - Demo how to configure Azure AD Authentication and bring back an Authentication Token
-<br/><br/>
-3.	**Azurestream.API** (.NET Core 3.1 API Project) 
-    - Bare-Bones .NET API that has what it needs to demo a simple API and Swagger capabilities.
-    - Demo Possibilities:
-        - Demo how to configure Swagger and what the Swagger UI looks like.
-        ![Screenshot of the staging deployment slot to test the deployments](Assets/images/azurestreamapiswagger.jpg)
-<br/><br/>
-4. **Azurestream.ARM** (ARM Project) 
-    - Demo Possibilities:
-        - **Azure.CLI.azcli - Pool of Azure CLI examples and demos**
-        - **Azure.PS.ps1 - Pool of Azure PowerShell examples and demos**
-        - **EnvironmentInstalls.txt** - What you need on your machine to run the Project
-        - **Demo.CLI.azcli** - Demo Steps from AZ204 SkillPipe. Use this if you can't get demos to run correctly.
-        - Demo Postman - Postman Collection so that you can demo REST Operations against Azure
-            - Microsoft REST.postman_collection.json
-            - Microsoft REST.postman_environment.json
-            - Demo Acquiring Azure Authentication Token
-            - Demo Get Resource Groups
-            - Demo Get Blob Images using SAS Token
-            - Demo Get Blob Containers using SAS Token
-            - Demo Get Azure Table Entities using SAS Token
-            - Demo Post Azure Table Entity
-            - Demo Get Azure Table Entities with Filter
-            - Demo PUT Azure Table Entity
-        - Demo Kubernetes example yaml file
-        - Demo Kubernetes azure-vote.yaml file from (https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough)
-        - Exam Reference file for your students - **AZ204Reference.azcli**
-<br/><br/>
-5.	**Azurestream.Console** (.Net Core 3.1 Console Application) 
-    - Demo Possibilities:
-        - Demo VM Creation with C#
-        - Demo Azure Batch Creation with C#
-        - Demo CosmosDB with C#
-        - Demo MSAL.NET Authentication with C#
+
         - Demo Azure Blobs with C#
         - Demo Azure Tables with C#
         - Demo Azure Queues with C#
         - Demo Azure Search with C#
         - Demo Event Hubs with C#
-        - Demo Service Bus with C#
-        - Demo Fluent SDK
-        - Demo Transiant Errors with C#
         - I will be continually growing the pool of samples as this evolves. 
 
         ![Screenshot of the staging deployment slot to test the deployments](Assets/images/azurestreamconsole.jpg)
