@@ -1,11 +1,7 @@
 ﻿using apa.BOL.CosmosDB;
 using Microsoft.Azure.Cosmos;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace azurestream.console
 {

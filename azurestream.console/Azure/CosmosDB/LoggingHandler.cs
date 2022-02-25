@@ -3,9 +3,6 @@ using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Azure.Cosmos;
 using System.Configuration;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace azurestream.console
 {

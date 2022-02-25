@@ -45,8 +45,8 @@ namespace azurestream.console.Models
         [SearchableField]
         public Address Address { get; set; }
 
-        [SearchableField(IsFilterable = true, IsSortable = true)]
-        public GeographyPoint Location { get; set; }
+        //[SearchableField(IsFilterable = true, IsSortable = true)]
+        //public GeographyPoint Location { get; set; }
 
         public Room[] Rooms { get; set; }
     }

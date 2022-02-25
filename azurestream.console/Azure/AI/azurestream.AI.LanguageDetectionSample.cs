@@ -1,9 +1,6 @@
 ﻿using Microsoft.Azure.CognitiveServices.ContentModerator;
 using Microsoft.Azure.CognitiveServices.Language.TextAnalytics;
 using Microsoft.Azure.CognitiveServices.Language.TextAnalytics.Models;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace azurestream.console
 {

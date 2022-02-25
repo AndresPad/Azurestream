@@ -5,8 +5,6 @@ using Azure.Search.Documents.Indexes.Models;
 using Azure.Search.Documents.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Spatial;
-using System;
-using System.Threading;
 
 namespace azurestream.console
 {
@@ -24,10 +22,10 @@ namespace azurestream.console
 
             string indexName = configuration["SearchIndexName"];
 
-            Console.WriteLine("{0}", "Deleting index...\n");
+            Console.WriteLine("{0}", "Deleting index...");
             DeleteIndexIfExists(indexName, indexClient);
 
-            Console.WriteLine("{0}", "Creating index...\n");
+            Console.WriteLine("{0}", "\n Creating index...\n");
             CreateIndex(indexName, indexClient);
 
             SearchClient searchClient = indexClient.GetSearchClient(indexName);
@@ -37,7 +35,7 @@ namespace azurestream.console
 
             SearchClient indexClientForQueries = CreateSearchClientForQueries(indexName, configuration);
 
-            //RunQueries(indexClientForQueries);
+            RunQueries(indexClientForQueries);
 
             Console.WriteLine("{0}", "Complete.  Press any key to end application...\n");
             Console.ReadKey();
@@ -53,6 +51,7 @@ namespace azurestream.console
             return indexClient;
         }
 
+        //------------------------------------------------------------------------------------------------------
         private static SearchClient CreateSearchClientForQueries(string indexName, IConfigurationRoot configuration)
         {
             string searchServiceEndPoint = configuration["SearchServiceEndPoint"];
@@ -79,6 +78,7 @@ namespace azurestream.console
             }
         }
 
+        //------------------------------------------------------------------------------------------------------
         private static void CreateIndex(string indexName, SearchIndexClient indexClient)
         {
             FieldBuilder fieldBuilder = new FieldBuilder();
@@ -105,7 +105,7 @@ namespace azurestream.console
                         ParkingIncluded = false,
                         LastRenovationDate = new DateTimeOffset(1970, 1, 18, 0, 0, 0, TimeSpan.Zero),
                         Rating = 3.6,
-                        Location = GeographyPoint.Create(40.760586, -73.975403),
+                        //Location = GeographyPoint.Create(40.760586, -73.975403),
                         Address = new Models.Address()
                         {
                             StreetAddress = "677 5th Ave",
@@ -163,7 +163,7 @@ namespace azurestream.console
                         ParkingIncluded = false,
                         LastRenovationDate = new DateTimeOffset(1979, 2, 18, 0, 0, 0, TimeSpan.Zero),
                         Rating = 3.60,
-                        Location = GeographyPoint.Create(27.384417, -82.452843),
+                        //Location = GeographyPoint.Create(27.384417, -82.452843),
                         Address = new Models.Address()
                         {
                             StreetAddress = "140 University Town Center Dr",
@@ -221,7 +221,7 @@ namespace azurestream.console
                         ParkingIncluded = true,
                         LastRenovationDate = new DateTimeOffset(2015, 9, 20, 0, 0, 0, TimeSpan.Zero),
                         Rating = 4.80,
-                        Location = GeographyPoint.Create(33.84643, -84.362465),
+                        //Location = GeographyPoint.Create(33.84643, -84.362465),
                         Address = new Models.Address()
                         {
                             StreetAddress = "3393 Peachtree Rd",
@@ -282,6 +282,85 @@ namespace azurestream.console
 
             Console.WriteLine("Waiting for documents to be indexed...\n");
             Thread.Sleep(2000);
+        }
+
+        //------------------------------------------------------------------------------------------------------
+        private static void RunQueries(SearchClient searchClient)
+        {
+            SearchOptions options;
+            SearchResults<Models.Hotel> results;
+
+            Console.WriteLine("Search the entire index for the term 'motel' and return only the HotelName field:\n");
+
+            options = new SearchOptions();
+            options.Select.Add("HotelName");
+
+            results = searchClient.Search<Models.Hotel>("motel", options);
+
+            WriteDocuments(results);
+
+            Console.Write("Apply a filter to the index to find hotels with a room cheaper than $100 per night, ");
+            Console.WriteLine("and return the hotelId and description:\n");
+
+            options = new SearchOptions()
+            {
+                Filter = "Rooms/any(r: r/BaseRate lt 100)"
+            };
+            options.Select.Add("HotelId");
+            options.Select.Add("Description");
+
+            results = searchClient.Search<Models.Hotel>("*", options);
+
+            WriteDocuments(results);
+
+            Console.Write("Search the entire index, order by a specific field (lastRenovationDate) ");
+            Console.Write("in descending order, take the top two results, and show only hotelName and ");
+            Console.WriteLine("lastRenovationDate:\n");
+
+            options =
+                new SearchOptions()
+                {
+                    Size = 2
+                };
+            options.OrderBy.Add("LastRenovationDate desc");
+            options.Select.Add("HotelName");
+            options.Select.Add("LastRenovationDate");
+
+            results = searchClient.Search<Models.Hotel>("*", options);
+
+            WriteDocuments(results);
+
+            Console.WriteLine("Search the hotel names for the term 'hotel':\n");
+
+            options = new SearchOptions();
+            options.SearchFields.Add("HotelName");
+
+            //Adding details to select, because "Location" is not supported yet when deserialize search result to "Hotel"
+            options.Select.Add("HotelId");
+            options.Select.Add("HotelName");
+            options.Select.Add("Description");
+            options.Select.Add("Category");
+            options.Select.Add("Tags");
+            options.Select.Add("ParkingIncluded");
+            options.Select.Add("LastRenovationDate");
+            options.Select.Add("Rating");
+            options.Select.Add("Address");
+            options.Select.Add("Rooms");
+
+            results = searchClient.Search<Models.Hotel>("hotel", options);
+
+            WriteDocuments(results);
+        }
+
+        //------------------------------------------------------------------------------------------------------
+        private static void WriteDocuments(SearchResults<Models.Hotel> searchResults)
+        {
+            foreach (SearchResult<Models.Hotel> result in searchResults.GetResults())
+            {
+                Console.WriteLine(result.Document);
+            }
+
+            Console.WriteLine();
         }
     }
 }

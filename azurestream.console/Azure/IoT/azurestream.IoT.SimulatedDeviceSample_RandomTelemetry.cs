@@ -1,10 +1,7 @@
 ﻿using apa.BOL.IoT;
 using Microsoft.Azure.Devices.Client;
 using Newtonsoft.Json;
-using System;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace azurestream.console
 {

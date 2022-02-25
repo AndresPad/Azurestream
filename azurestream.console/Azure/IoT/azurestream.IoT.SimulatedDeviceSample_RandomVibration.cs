@@ -1,15 +1,12 @@
-﻿//https://docs.microsoft.com/en-us/learn/modules/manage-azure-iot-hub-with-metrics-alerts/3-exercise-write-device-telemetry-code?pivots=vs-csharp
-//https://github.com/MicrosoftDocs/mslearn-data-anomaly-detection-using-azure-iot-hub
-
-using Microsoft.Azure.Devices.Client;
+﻿using Microsoft.Azure.Devices.Client;
 using Newtonsoft.Json;
-using System;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace azurestream.console
 {
     //--------------------------------------------------------------------------------------------------------------
+    //https://docs.microsoft.com/en-us/learn/modules/manage-azure-iot-hub-with-metrics-alerts/3-exercise-write-device-telemetry-code?pivots=vs-csharp
+    //https://github.com/MicrosoftDocs/mslearn-data-anomaly-detection-using-azure-iot-hub
     class SimulatedDeviceSample_RandomVibration
     {
         // The device connection string to authenticate the device with your IoT hub.

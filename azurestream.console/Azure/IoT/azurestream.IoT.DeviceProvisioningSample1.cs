@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace azurestream.console
+﻿namespace azurestream.console
 {
     //--------------------------------------------------------------------------------------------------------------
     public class DeviceProvisioningSample1

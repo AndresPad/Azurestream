@@ -1,19 +1,16 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
-// This application uses the Azure IoT Hub device SDK for .NET
-// For samples see: https://github.com/Azure/azure-iot-sdk-csharp/tree/master/iothub/device/samples
-//                  https://github.com/Azure-Samples/azure-iot-samples-csharp/blob/master/iot-hub/Quickstarts/SimulatedDevice/Program.cs
-
-using Microsoft.Azure.Devices.Client;
+﻿using Microsoft.Azure.Devices.Client;
 using Newtonsoft.Json;
-using System;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace azurestream.console
 {
     //--------------------------------------------------------------------------------------------------------------
+    // Copyright (c) Microsoft. All rights reserved.
+    // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+    // This application uses the Azure IoT Hub device SDK for .NET
+    // For samples see: https://github.com/Azure/azure-iot-sdk-csharp/tree/master/iothub/device/samples
+    //                  https://github.com/Azure-Samples/azure-iot-samples-csharp/blob/master/iot-hub/Quickstarts/SimulatedDevice/Program.cs
     class SimulatedDeviceSample_RandomTemp
     {
         // The device connection string to authenticate the device with your IoT hub.

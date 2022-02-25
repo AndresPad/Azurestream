@@ -1,5 +1,0 @@
-#Simulate and Send Telemetry
-az iot device simulate -d iot-device-1 -n YOURIOTHUB
-
-#Monitor a Device
-az iot hub monitor-events --output table --hub-name YOURIOTHUB

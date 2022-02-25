@@ -1,6 +1,6 @@
 # Introduction 
 This Repo contains a .NET 6.0 Visual 2022 Project called **Azurestream**. This Project was built for the purposes of giving Azure Engineers
-a functioning Visual Studio 2019 and Visual Studio Code Project that they could leverage for demos, presentations or simply just improving
+a functioning Visual Studio 2022 and Visual Studio Code Project that they could leverage for demos, presentations or simply just improving
 their C# and Azure skills. The solution contains a number of demos that could come in extremely useful during your deliveries.
 
 

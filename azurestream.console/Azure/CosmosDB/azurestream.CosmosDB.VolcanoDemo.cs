@@ -2,11 +2,7 @@
 using Bogus;
 using Microsoft.Azure.Cosmos;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace azurestream.console
 {

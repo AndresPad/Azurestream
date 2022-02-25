@@ -1,9 +1,6 @@
 ﻿using Microsoft.Azure.Devices.Client;
-using System;
 using System.Text;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace azurestream.console
 {

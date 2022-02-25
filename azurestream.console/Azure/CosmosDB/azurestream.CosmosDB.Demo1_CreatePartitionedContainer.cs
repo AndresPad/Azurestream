@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Configuration;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using apa.BOL.CosmosDB;
+﻿using apa.BOL.CosmosDB;
 using Microsoft.Azure.Cosmos;
+using System.Configuration;
 
 namespace azurestream.console
 {
