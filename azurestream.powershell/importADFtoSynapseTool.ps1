@@ -512,8 +512,8 @@ function ProcessResource {
     Set-Variable SynapseAPIVersion -Value '2019-06-01-preview'
 
     $ConfigFile = "appsettings.json"
-    #$sourceADFResourceId = "/subscriptions/831a353b-37df-42bb-b4da-cfec630a5cfe/resourceGroups/azu-data-rg/providers/Microsoft.DataFactory/factories/airstream"
-    #$destSynapseResourceId = "/subscriptions/831a353b-37df-42bb-b4da-cfec630a5cfe/resourceGroups/AZU-DW-RG/providers/Microsoft.Synapse/workspaces/air"
+    #$sourceADFResourceId = "/subscriptions/YOURSUBSCRIPTIONID/resourceGroups/azu-data-rg/providers/Microsoft.DataFactory/factories/airstream"
+    #$destSynapseResourceId = "/subscriptions/YOURSUBSCRIPTIONID/resourceGroups/AZU-DW-RG/providers/Microsoft.Synapse/workspaces/air"
     #.\importADFtoSynapseTool.ps1 -ConfigFile appsettings.json
     #.\importADFtoSynapseTool.ps1 -sourceADFResourceId /subscriptions/831a353b-37df-42bb-b4da-cfec630a5cfe/resourceGroups/azu-data-rg/providers/Microsoft.DataFactory/factories/airstream -destSynapseResourceId /subscriptions/831a353b-37df-42bb-b4da-cfec630a5cfe/resourceGroups/AZU-DW-RG/providers/Microsoft.Synapse/workspaces/air
 
