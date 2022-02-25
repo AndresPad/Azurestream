@@ -1,0 +1,18 @@
+{
+  "messages": {
+    "work_event": {
+      "msg_time": "2021-04-30 13:53:00",
+      "vert_correction": -1.4,
+      "ch_latitude": 28.41651,
+      "ch_longitutde": -96.46531,
+      "ch_depth": -4.78,
+      "ch_heading": 49,
+      "slurry_velocity": 0,
+      "slurry_density": 1.33,
+      "pump_rpm": 317,
+      "vacuum": -30.0,
+      "outlet_psi": 1.0,
+      "comment": "Generic work comment"
+    }
+  }
+}

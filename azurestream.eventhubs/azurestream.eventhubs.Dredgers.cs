@@ -22,7 +22,7 @@ namespace azurestream.eventhubs
     public class DredgerEventCreator
     {
         private const string EventHubNamespaceCnx = "Endpoint=sb://YOUREVENTHUBNAMESPACE.servicebus.windows.net/;SharedAccessKeyName=YOURSHAREDACCESSPOLICY;SharedAccessKey=YOURACCESSKEY";
-        private const string EventHubName = "dredge-eh";
+        private const string EventHubName = "ship-eh";
         private const string TransactionsDumpFile = "mocktransactions.csv";
         private static EventHubProducerClient producerClient;
         //------------------------------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ namespace azurestream.eventhubs
 
             MainAsync().GetAwaiter().GetResult();
       
-            Console.WriteLine("Receiving Messages. Press enter key to stop worker.");
+            Console.WriteLine("Ending Event Hub Telemetry Simulator. Press enter key to stop worker.");
             Console.ReadLine();
         }
 

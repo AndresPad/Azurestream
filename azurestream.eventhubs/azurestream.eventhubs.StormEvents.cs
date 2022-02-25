@@ -26,7 +26,7 @@ namespace azurestream.eventhubs
 
             await EventHubIngestionAsync();
 
-            Console.WriteLine("Receiving Messages. Press enter key to stop worker.");
+            Console.WriteLine("Sending Messages. Press enter key to stop worker.");
             Console.ReadLine();
         }
 
@@ -37,8 +37,7 @@ namespace azurestream.eventhubs
             await using var producerClient = new EventHubProducerClient(EventHubNamespaceCnx, EventHubName);
 
             List<StormEvent> StormEvents = JsonConvert.DeserializeObject<List<StormEvent>>(
-               File.ReadAllText(@"StormEvents.json")
-           );
+               File.ReadAllText(@"StormEvents.json"));
 
             foreach (StormEvent se in StormEvents)
             {

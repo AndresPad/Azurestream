@@ -1,0 +1,62 @@
+{
+  "HOPPER_DREDGING_DATA": {
+    "DREDGE_NAME": "Terrapin Island",
+    "HOPPER_DATA_RECORD": {
+      "DATE_TIME": "03/08/2021 19:49:32",
+      "LOAD_NUMBER": "699",
+      "VESSEL_X": {
+        "_coord_type": "LL",
+        "__text": "-79.831620"
+      },
+      "VESSEL_Y": {
+        "_coord_type": "LL",
+        "__text": "32.731377"
+      },
+      "PORT_DRAG_X": {
+        "_coord_type": "LL",
+        "__text": "-79.831365"
+      },
+      "PORT_DRAG_Y": {
+        "_coord_type": "LL",
+        "__text": "32.731388"
+      },
+      "STBD_DRAG_X": {
+        "_coord_type": "LL",
+        "__text": "-79.831506"
+      },
+      "STBD_DRAG_Y": {
+        "_coord_type": "LL",
+        "__text": "32.731192"
+      },
+      "HULL_STATUS": "CLOSED",
+      "VESSEL_COURSE": "116",
+      "VESSEL_SPEED": "1.8",
+      "VESSEL_HEADING": "118.6",
+      "TIDE": "3.11",
+      "DRAFT_FORE": "21.16",
+      "DRAFT_AFT": "22.98",
+      "ULLAGE_FORE": "9.18",
+      "ULLAGE_AFT": "8.71",
+      "HOPPER_VOLUME": "4372.6",
+      "DISPLACEMENT": "10811.9",
+      "EMPTY_DISPLACEMENT": "5050.9",
+      "DRAGHEAD_DEPTH_PORT": "61.68",
+      "DRAGHEAD_DEPTH_STBD": "57.05",
+      "PORT_DENSITY": "1.04",
+      "STBD_DENSITY": "1.01",
+      "PORT_VELOCITY": "25.1",
+      "STBD_VELOCITY": "22.6",
+      "PUMP_RPM_PORT": "227.225",
+      "PUMP_RPM_STBD": "227.65",
+      "MIN_PUMP_EFFORT_PORT": "false",
+      "MIN_PUMP_EFFORT_STBD": "false",
+      "PUMP_WATER_PORT": "false",
+      "PUMP_WATER_STBD": "false",
+      "PUMP_MATERIAL_PORT": "true",
+      "PUMP_MATERIAL_STBD": "true",
+      "PUMP_OUT_ON": "false",
+      "PIQ": "0"
+    },
+    "_version": "2.0"
+  }
+}
