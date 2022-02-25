@@ -1,0 +1,98 @@
+﻿@using System.Reactive.Linq
+@using Azure.IoT.ModelsRepository
+@using azurestream.blazor.Devices
+@using azurestream.blazor.Events
+@using Microsoft.Azure.Devices.Serialization
+@using Microsoft.Azure.Devices.Shared
+@inject IDeviceService DeviceService
+
+<div>
+    @if (_deviceTwin is not null)
+    {
+        <div class="card-body">
+            <h4>Device Details</h4>
+            <table class="table text-white">
+                <tr>
+                    <th scope="col">Device Twin</th>
+                    <th scope="col">Digital Twin</th>
+                    <th scope="col">Model</th>
+                </tr>
+                <tr>
+                    <td><pre>@_deviceTwin?.SerializeTwin()</pre></td>
+                    <td><pre>@_digitalTwin?.SerializeDigitalTwin()</pre></td>
+                    <td>
+                        <table>
+                            @if (_modelResult?.Content is not null)
+                            {
+                                @foreach (var dtmi in _modelResult?.Content.Keys)
+                                {
+                                    <tr>
+                                        <td>
+                                                <div><a href="" @onclick="@(() => ToggleVisibility(dtmi))" @onclick:preventDefault>@dtmi</a></div>
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td><p hidden="@(_modelsVisibility != null && _modelsVisibility.ContainsKey(dtmi) ? _modelsVisibility[dtmi] : false)"><pre>@LoadModel(dtmi)</pre></p></td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>
+                                        <div>Unable to resolve model.</div>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <h4>Events</h4>
+            <EventList DeviceId="@DeviceId" />
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-primary" role="alert">
+            Device not found.
+        </div>
+    }
+
+</div>
+@code {
+    [Parameter]
+    public string? DeviceId { get; set; }
+
+
+    private Twin? _deviceTwin;
+    private BasicDigitalTwin? _digitalTwin;
+    private ModelResult? _modelResult;
+    private string? _model = string.Empty;
+    private Dictionary<string, bool>? _modelsVisibility;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        _deviceTwin = await DeviceService.GetDeviceTwinAsync(DeviceId);
+        _digitalTwin = await DeviceService.GetDigitalTwinAsync(DeviceId);
+        _modelResult = await DeviceService.ResolveModelAsync(_deviceTwin?.ModelId);
+        if(_modelResult?.Content != null)
+        {
+            _modelsVisibility =_modelResult.Content.Keys.ToDictionary(k => k, k => true);
+        } 
+    }
+
+    private string LoadModel(string dtmi)
+    {
+        return _modelResult != null ? _modelResult.SerializeDigitalTwinModel(dtmi) : string.Empty;
+    }
+
+    private void ToggleVisibility(string dtmi)
+    {
+        if (_modelsVisibility != null)
+        {
+            _modelsVisibility[dtmi] = !_modelsVisibility[dtmi];
+        }
+    }
+}

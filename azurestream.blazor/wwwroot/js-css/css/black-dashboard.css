@@ -1,0 +1,125 @@
+/*!
+
+ =========================================================
+ * Dark Dashboard Pro 
+ =========================================================
+
+
+ =========================================================
+
+ */
+
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -ms-overflow-style: scrollbar;
+  -webkit-tap-highlight-color: rgba(34, 42, 66, 0);
+}
+
+@-ms-viewport {
+  width: device-width;
+}
+
+article,
+aside,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section {
+  display: block;
+}
+
+body {
+  margin: 0;
+  font-family: "Rubik", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #fff;
+  text-align: left;
+  background-color: #1e1e2f;
+}
+
+[tabindex="-1"]:focus {
+  outline: 0 !important;
+}
+
+hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+    border-color: #1e1e2f;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+
+.sidebar {
+    /* width: 220px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-size: cover;
+    background-position: center center;
+    display: block;*/
+    margin-left: 20px;
+}
+
+    .sidebar .sidebar-menu {
+        background: #3358f4;
+        background: -webkit-linear-gradient(0deg, #3358f4 0%, #1d8cf8 100%);
+        background: -o-linear-gradient(0deg, #3358f4 0%, #1d8cf8 100%);
+        background: -moz-linear-gradient(0deg, #3358f4 0%, #1d8cf8 100%);
+        background: linear-gradient(0deg, #3358f4 0%, #1d8cf8 100%);
+        box-shadow: 0px 0px 45px 0px rgba(0, 0, 0, 0.6);
+        border-radius: 5px;
+    }
+/*
+.sidebar .sidebar-menu {
+    height: calc(100vh - 95px);
+    background: #3358f4;
+    background: -webkit-linear-gradient(0deg, #3358f4 0%, #1d8cf8 100%);
+    background: -o-linear-gradient(0deg, #3358f4 0%, #1d8cf8 100%);
+    background: -moz-linear-gradient(0deg, #3358f4 0%, #1d8cf8 100%);
+    background: linear-gradient(0deg, #3358f4 0%, #1d8cf8 100%);
+    box-shadow: 0px 0px 45px 0px rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+    
+}*/
+
+.top-row {
+    padding: 0;
+    padding-left: 10px !important;
+    padding-right: 4px;
+}
+
+.logo-blue {
+    
+   
+    
+}
+
+
+
+
+

@@ -1,0 +1,200 @@
+﻿/* You can add global styles to this file, and also import other style files */
+/* xslayout.css */
+
+/*----------------------------------------------------------------------------------------
+                       IMPORT FROM GOOGLE FONTS 
+    font-family: 'Dosis', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans Condensed', sans-serif;
+-----------------------------------------------------------------------------------------*/
+@import url(https://fonts.googleapis.com/css?family=Dosis:400,500,600,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Muli:300,400,500,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
+@import url(https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700&subset=latin-ext);
+@import url(https://fonts.googleapis.com/css?family=Lato);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,500);
+@import url(https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800);
+@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500);
+
+
+html, body {
+    font-family: "Rubik", 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+a, .btn-link {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.content {
+    padding-top: 1.1rem;
+}
+
+    
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+
+.navbar-brand {
+    font-family: "Nunito", sans-serif;
+    letter-spacing: 1px;
+    display: inline-block;
+}
+
+
+/*** 
+
+====================================================================
+	Main Layout
+====================================================================
+
+***/
+
+.card {
+    background: #27293d;
+    border: 0;
+    position: relative;
+    width: 100%;
+    margin-bottom: 30px;
+    box-shadow: 0 1px 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+    .card .card-title {
+        margin-bottom: .75rem;
+    }
+
+    .card .card-body {
+        padding: 15px;
+    }
+
+        .card .card-body .card-title {
+            color: #ffffff;
+            text-transform: inherit;
+            font-weight: 300;
+            margin-bottom: .75rem;
+        }
+
+    .card .card-header {
+        padding: 15px 15px 0;
+        border: 0;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+        .card .card-header:not([data-background-color]) {
+            background-color: transparent;
+        }
+
+        .card .card-header .card-title {
+            color: #ffffff;
+            font-weight: 100;
+        }
+
+
+/*** 
+
+====================================================================
+	NavTopMenu
+====================================================================
+
+***/
+
+/*.navbar .photo {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+    .navbar .photo img {
+        width: 100%;
+    }
+*/
+/*** 
+
+====================================================================
+	NavSideMenu
+====================================================================
+
+***/
+
+
+/*** 
+
+====================================================================
+	Footer
+====================================================================
+
+***/
+
+
+/*** 
+
+====================================================================
+	Scroll Bar
+====================================================================
+
+***/
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F1F1F1;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(153,153,153,0.4);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #999;
+}
+
+.nicescroll-rails {
+    width: 10px !important;
+    z-index: 999 !important;
+}
+
+    .nicescroll-rails div {
+        width: 8px !important;
+        border-radius: 3px !important;
+        background-color: #c4c4c4 !important;
+        border: 1px solid #cbfeff !important;
+    }

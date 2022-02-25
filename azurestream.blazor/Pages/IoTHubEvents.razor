@@ -1,0 +1,41 @@
+﻿@page "/events"
+
+@using System.ComponentModel;
+@using azurestream.blazor.Components
+@using azurestream.blazor.Events;
+
+@inject IEventReaderService EventService
+@implements IDisposable
+
+<PageTitle>IoT Hub Events from Built-In Endpoint</PageTitle>
+
+
+
+<h1>Events from IoT Hub</h1>
+
+<EventList />
+
+@code {
+    protected override void OnInitialized()
+    {
+        if (EventService is INotifyPropertyChanged changed)
+        {
+            changed.PropertyChanged += OnChange;
+        }
+
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        if (EventService is INotifyPropertyChanged changed)
+        {
+            changed.PropertyChanged -= OnChange;
+        }
+    }
+
+    private async void OnChange(object? sender, PropertyChangedEventArgs args)
+    {
+        await InvokeAsync(() => StateHasChanged());
+    }
+}

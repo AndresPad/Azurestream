@@ -1,0 +1,43 @@
+﻿@page "/devices"
+
+@using System.ComponentModel;
+@using azurestream.blazor.Components;
+@using azurestream.blazor.Devices;
+
+@inject IDeviceService DeviceService
+@implements IDisposable
+
+<PageTitle>IoT Hub Devices</PageTitle>
+
+
+<h1>Devices</h1>
+
+<h2>Recent activity</h2>
+<div>Automatically refeshed every 5 sec.</div>
+<DeviceList />
+
+
+@code {
+    protected override void OnInitialized()
+    {
+        if (DeviceService is INotifyPropertyChanged changed)
+        {
+            changed.PropertyChanged += OnChange;
+        }
+
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        if (DeviceService is INotifyPropertyChanged changed)
+        {
+            changed.PropertyChanged -= OnChange;
+        }
+    }
+
+    private async void OnChange(object? sender, PropertyChangedEventArgs args)
+    {
+        await InvokeAsync(() => StateHasChanged());
+    }
+}

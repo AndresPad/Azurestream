@@ -1,0 +1,111 @@
+﻿@using System.Reactive.Linq
+@using azurestream.blazor.Events
+@inject IEventReaderService EventService
+@implements IDisposable
+
+@if (_events is not null)
+{
+    if (_events.Count > 0)
+    {
+        <div class="card-body">
+            <a href="javascript:void(0);" class="card-link" @onclick="() => _events?.Clear()">Clear</a>
+        </div>
+        <div>
+        <table class="table text-white">
+            <tr>
+                <th scope="col">Enqueued Time</th>
+                <th scope="col">Source</th>
+                <th scope="col">Operation</th>
+                <th scope="col">DeviceId</th>
+                <th scope="col">Schema</th>
+                <th scope="col">Body</th>
+                <th scope="col">Sequence</th>
+                <th scope="col">Offset</th>
+            </tr>
+
+            @foreach (var item in _events)
+            {
+                <tr>
+                    <td>@item.EnqueuedTime</td>
+                    <td>@item.MessageSource</td>
+                    <td>@item.Operation</td>
+                    <td>@item.DeviceId</td>
+                    <td>@item.DataSchema</td>
+                    <td><pre><code>@item.Body</code></pre></td>
+                    <td>@item.SequenceNumber</td>
+                    <td>@item.Offset</td>
+                </tr>
+            }
+
+        </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-primary" role="alert">
+            No events have been sent.
+        </div>
+    }
+}
+
+@if (_processorInfo is not null)
+{
+    if (_processorInfo.Count > 0)
+    {
+            <div class="card-body">
+                <a href="javascript:void(0);" class="card-link" @onclick="() => _processorInfo?.Clear()">Clear</a>
+            </div>
+            <div>
+           <table class="table text-white">
+            <tr>
+                <th scope="col">TimeStamp</th>
+                <th scope="col">Type</th>
+                <th scope="col">Description</th>
+                <th scope="col">Exception Details</th>
+            </tr>
+
+            @foreach (var item in _processorInfo)
+            {
+                <tr>
+                    <td>@item.Timestamp</td>
+                    <td>@item.Type</td>
+                    <td>@item.Description</td>
+                    <td><pre><code>@item.Exception?.ToString()</code></pre></td>
+                </tr>
+            }
+
+        </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-primary" role="alert">
+            No processor info have been received.
+        </div>
+    }
+}
+
+@code {
+    private ObservableList<Event>? _events;
+    private ObservableList<EventProcessorInfo>? _processorInfo;
+
+    protected override void OnInitialized()
+    {
+        InitializeEventList(null);
+    }
+
+    private void InitializeEventList(string? deviceId)
+    {
+        if (SynchronizationContext.Current != null)
+        {
+            _events = new ObservableList<Event>(EventService.Events.ObserveOn(SynchronizationContext.Current), StateHasChanged);
+            _processorInfo = new ObservableList<EventProcessorInfo>(EventService.ProcessorInfo.ObserveOn(SynchronizationContext.Current), StateHasChanged);
+        }
+    }
+
+    public void Dispose()
+    {
+        _events?.Dispose();
+        _processorInfo?.Dispose();
+    }
+}

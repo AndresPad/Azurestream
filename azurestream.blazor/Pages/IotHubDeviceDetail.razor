@@ -1,0 +1,15 @@
+﻿@page "/device/{deviceId?}"
+
+@using System.ComponentModel;
+@using azurestream.blazor.Components
+
+<PageTitle>Device Info</PageTitle>
+
+<h1>@DeviceId</h1>
+
+<DeviceDetail DeviceId="@DeviceId" />
+
+@code{
+    [Parameter]
+    public string? DeviceId { get; set; } 
+}
