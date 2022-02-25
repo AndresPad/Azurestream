@@ -1,0 +1,10 @@
+{
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.dataScience.jupyterServerURI": "local",
+    "databricks.workspaceConfiguration": {
+        "workspaceGuid": "e4bc9d4a-2cb5-2120-0a61-8817c04e5044",
+        "lastActiveConnection": "airstream"
+    },
+    "python.pythonPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python37_64\\python.exe"
+}

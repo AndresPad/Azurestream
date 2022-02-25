@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>e2212b85-17f7-4c05-b46b-c82a0edc6800</ProjectGuid>
+    <ProjectGuid>{e2212b85-17f7-4c05-b46b-c82a0edc6800}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>azurestream.python.py</StartupFile>
     <SearchPath>
@@ -20,8 +20,26 @@
     <DebugSymbols>true</DebugSymbols>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkMoniker>.NETFramework,Version=$(TargetFrameworkVersion)</TargetFrameworkMoniker>
+  </PropertyGroup>
   <ItemGroup>
+    <Compile Include="azurestream.python.poc.2.py" />
+    <Compile Include="azurestream.python.poc.py" />
     <Compile Include="azurestream.python.py" />
+    <Compile Include="ML\01-create-workspace.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="libman.json" />
+    <Content Include="mypy.ini" />
+    <Content Include="requirements.txt" />
+    <Folder Include="Databricks\" />
+    <Folder Include="ML\" />
+    <Folder Include="ML\.azureml\" />
+    <Folder Include="IoT\" />
+    <Folder Include="ADLS\" />
+    <Folder Include="ADX\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
