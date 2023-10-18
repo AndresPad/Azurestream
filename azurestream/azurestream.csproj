@@ -3,12 +3,10 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-azurestream-014308AD-59F5-4648-9A4E-C7F2B4083FF2</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <Authors>azurestream</Authors>
     <Company>azurestream</Company>
     <Product>azurestream</Product>
-    <ApplicationInsightsResourceId>/subscriptions/831a353b-37df-42bb-b4da-cfec630a5cfe/resourceGroups/AZU-WebApps-RG/providers/microsoft.insights/components/azurestream</ApplicationInsightsResourceId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.1" />
